@@ -1,56 +1,59 @@
-import './PageCarrousel.css'
-import { Link } from 'react-router-dom';
+import './PageCarrousel.css';
 
-const PageCarrousel = ({ pages, breed, page, filter }) => {
-
-  const pointerBack = (breed, page) => {
-    if(breed) {
-      return `/home/breed=${breed}/page=${page - 1}`;
-    }
-    if(filter) {
-      return `/home/filter=${filter}/page=${page - 1}`;
-    }
-    return `/home/page=${page - 1}`;
-  };
-
-  const pointerNext = (breed, page) => {
-    if(breed) {
-      return `/home/breed=${breed}/page=${page + 1}`;
-    }
-    if(filter) {
-      return `/home/filter=${filter}/page=${page + 1}`;
-    }
-    return `/home/page=${page + 1}`;
-  };
+const PageCarrousel = ({ pages, page, setPage }) => {
   
-  const scrollToZero = () => {
+  // const pointerBack = (breed, page) => {
+  //   if(breed) {
+  //     return `/home/breed=${breed}/page=${page - 1}`;
+  //   }
+  //   if(filter) {
+  //     return `/home/filter=${filter}/page=${page - 1}`;
+  //   }
+  //   return `/home/page=${page - 1}`;
+  // };
+  
+  // const pointerNext = (breed, page) => {
+  //   if(breed) {
+  //     return `/home/breed=${breed}/page=${page + 1}`;
+  //   }
+  //   if(filter) {
+  //     return `/home/filter=${filter}/page=${page + 1}`;
+  //   }
+  //   return `/home/page=${page + 1}`;
+  // };
+  
+  const handleBack = () => {
+    setPage(page - 1);
     window.scrollTo(0, 0);
   };
+
+  const handleNext = () => {
+    setPage(page + 1);
+    window.scrollTo(0, 0);
+  }
 
   return (
     <div className="search-bar-container">
       {
         pages !== 0 && <>
-          <Link 
-            to={pointerBack(breed, page)} 
+          <div 
             className={`${page === 1 ? "disabled-link" : "link"} button-container`} 
-            onClick={scrollToZero}
+            onClick={handleBack}
           >
             <div className="nav-buttons">{"<"}</div>
-          </Link>
+          </div>
           <div className={`${page === 1 ? "btn-placeholder" : ""}`}>
           </div>
           { 
             pages !== 1 &&
             <strong>{page}</strong>
           }
-          <Link 
-            to={pointerNext(breed, page)} 
+          <div  
             className={`${page >= pages ? "disabled-link" : "link"} button-container`} 
-            onClick={scrollToZero}
+            onClick={handleNext}
           >
             <div className="nav-buttons">{">"}</div>
-          </Link>
+          </div>
           <div className={`${page >= pages ? "btn-placeholder" : ""}`}>
           </div>
         </>

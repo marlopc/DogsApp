@@ -56,6 +56,10 @@
   border-color: #603808;
 }
 
+.link {
+  cursor: pointer;
+}
+
 .link:visited,
 .link:link,
 .link:active {

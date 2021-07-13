@@ -1,12 +1,12 @@
 import './SearchFilters.css';
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+// import { useHistory } from "react-router-dom";
 
 
 export const getSortingCb = (sorting) => {
-  if(sorting === "AA") {
-    return (a, b) => {
+  const sorts = {
+    AA (a, b) {
       if(a.name > b.name) {
         return 1
       }
@@ -14,10 +14,8 @@ export const getSortingCb = (sorting) => {
         return -1;
       }
       return 0
-    };
-  }
-  if(sorting === "AD") {
-    return (a, b) => {
+    },
+    AD (a, b) {
       if(a.name > b.name) {
         return -1
       }
@@ -25,10 +23,8 @@ export const getSortingCb = (sorting) => {
         return 1;
       }
       return 0
-    };
-  }
-  if(sorting === "WA") {
-    return (a, b) => {
+    },
+    WA (a, b) {
       if(parseInt(a.weight) > parseInt(b.weight)) {
         return 1
       }
@@ -36,10 +32,8 @@ export const getSortingCb = (sorting) => {
         return -1;
       }
       return 0
-    };
-  }
-  if(sorting === "WD") {
-    return (a, b) => {
+    },
+    WD (a, b) {
       if(parseInt(a.weight) > parseInt(b.weight)) {
         return -1
       }
@@ -47,18 +41,20 @@ export const getSortingCb = (sorting) => {
         return 1;
       }
       return 0
-    };
+    }
   }
+
+  return sorts[sorting];
 }
 
-const SearchFilters = ({ filter, setSortType, sortType, setUserCreatedFilter, userCreatedFilter }) => {
+const SearchFilters = ({ setPage, filter, setFilter, setSortType, sortType, setUserCreatedFilter, userCreatedFilter, search, setSearch }) => {
   const [form, setForm] = useState("");
   const [temperaments, setTemperaments] = useState([]);
 
   const stateTemperaments = useSelector(state => state.temperaments);
   const stateFilter = useSelector(state => state.filter);
 
-  const history = useHistory();
+  // const history = useHistory();
 
   useEffect(() => {
     setTemperaments(stateTemperaments);
@@ -67,7 +63,8 @@ const SearchFilters = ({ filter, setSortType, sortType, setUserCreatedFilter, us
   const handleSubmit = (e) => {
     e.preventDefault();
     if(form !== "") {
-      history.push(`/home/breed=${form}/page=1`);
+      setPage(1);
+      setSearch(form);
     }
   }
 
@@ -77,16 +74,16 @@ const SearchFilters = ({ filter, setSortType, sortType, setUserCreatedFilter, us
 
   const handleSortChange = (e) => {
     setSortType(e.target.value);
-    history.push(`/home/${filter ? "filter=" + filter + "/" : ""}page=1`);
   }
 
   const handleFilter = (e) => {
-    history.push(`/home/filter=${e.target.value}/page=1`);
+    setPage(1);
+    setFilter(e.target.value);
   }
 
   const handleCheckbox = (e) => {
+    setPage(1);
     setUserCreatedFilter(e.target.checked);
-    history.push(`/home/${filter ? "filter=" + filter + "/" : ""}page=1`);
   }
 
   return (

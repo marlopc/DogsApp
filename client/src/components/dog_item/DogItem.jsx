@@ -5,7 +5,7 @@ const DogItem = ({ name, image_url, temperament, id }) => {
 
   return (
     <>
-    <Link to={`/home/detail/id=${id}`}className="item-container link">
+    <Link to={`/detail/id=${id}`}className="item-container link">
       <img src={`${image_url}`} alt={name}/>
       <div className="dog-info">
         <h2>{name}</h2>
