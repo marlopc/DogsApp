@@ -2,8 +2,17 @@ const initialState = {
   temperaments: [],
   dogs: [],
   dogDetail: {},
-  found: true,
-  pages: 0
+  pagination: {
+    pages: 0,
+    page: 1
+  },
+  filters: {
+    sortType: "AA",
+    filter: "",
+    search: "",
+    searchInput: "",
+    userCreatedFilter: false
+  }
 }
 
 const reducer = (state = initialState, {type, payload}) => {
@@ -17,8 +26,7 @@ const reducer = (state = initialState, {type, payload}) => {
     case 'GET_DOGS':
       return {
         ...state,
-        dogs: payload.result,
-        found: payload.found
+        dogs: payload
       }
       
     case 'GET_DOG_DETAIL':
@@ -27,10 +35,74 @@ const reducer = (state = initialState, {type, payload}) => {
         dogDetail: payload
       }
  
+    case 'SET_DEFAULT_STATE':
+      return {
+        ...state,
+        pagination: payload.pagination,
+        filters: payload.filters
+      }
+
+    case 'SET_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          filter: payload
+        }
+      }
+
+    case 'SET_USER_CREATED_FILTER':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          userCreatedFilter: payload
+        }
+      }
+    
+    case 'SET_SEARCH':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          search: payload
+        }
+      }
+
+    case 'SET_SEARCH_INPUT':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          searchInput: payload
+        }
+      }
+
+    case 'SET_SORT_TYPE':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          sortType: payload
+        }
+      }
+
     case 'SET_PAGES':
       return {
         ...state,
-        pages: payload
+        pagination: {
+          ...state.pagination,
+          pages: payload
+        } 
+      }
+
+    case 'SET_PAGE':
+      return {
+        ...state,
+        pagination: {
+          ...state.pagination,
+          page: payload
+        }
       }
 
     default: 

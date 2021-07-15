@@ -1,5 +1,3 @@
-import { getSortingCb } from '../components/search_filters/SearchFilters';
-
 const axios = require('axios');
 
 export function getTemperaments() {
@@ -36,19 +34,70 @@ export function getDogDetail(id) {
   };
 };
 
-export function addDog(form) {
-  return function(dispatch) {
-    return axios.post('http://localhost:3001/dog', form)
-      .then(dog => {
-        dispatch({type: "ADD_DOG", payload: dog.data});
-      })
-      .catch(error => console.error(error));
+export function setDefault() {
+  return {
+    type: "SET_DEFAULT_STATE",
+    payload: {
+      pagination: {
+        pages: 0, 
+        page: 1
+      },
+      filters: {
+        sortType: "AA",
+        filter: "",
+        search: "",
+        searchInput: "",
+        userCreatedFilter: false
+      }
+    }
   };
 };
 
-export function setSortedType(type) {
+export function setPages(totalPages) {
   return {
-    type: "SET_SORTED_TYPE",
-    payload: getSortingCb(type)
+    type: "SET_PAGES",
+    payload: totalPages
+  };
+};
+
+export function setPage(currentPage) {
+  return {
+    type: "SET_PAGE",
+    payload: currentPage
+  };
+};
+
+export function setSortType(type) {
+  return {
+    type: "SET_SORT_TYPE",
+    payload: type
+  };
+};
+
+export function setFilter(temperament) {
+  return {
+    type: "SET_FILTER",
+    payload: temperament
+  };
+};
+
+export function setSearch(param) {
+  return {
+    type: "SET_SEARCH",
+    payload: param
+  };
+};
+
+export function setSearchInput(input) {
+  return {
+    type: "SET_SEARCH_INPUT",
+    payload: input
+  }
+}
+
+export function setUserCreatedFilter(boolean) {
+  return {
+    type: "SET_USER_CREATED_FILTER",
+    payload: boolean
   };
 };

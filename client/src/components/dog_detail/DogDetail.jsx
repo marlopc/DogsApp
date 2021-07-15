@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getDogDetail } from '../../actions';
 import Loader from '../loader/Loader';
 import NavBar from '../nav_bar/NavBar';
+import Footer from '../footer/Footer';
 import './DogDetail.css';
 
 const DogDetail = ({ id }) => {
@@ -21,20 +22,41 @@ const DogDetail = ({ id }) => {
   return (
     <div>
       <NavBar />
+      <div className="detail-background">
       {
-        dogDetail.hasOwnProperty("id") && id.toString() === dogDetail.id.toString() ? (
+        dogDetail.id && id.toString() === dogDetail.id.toString() ? (
           <>
-            <h1>{dogDetail.name}</h1>
-            {dogDetail.hasOwnProperty("image") && <img src={`${dogDetail.image.url}`} alt={dogDetail.image_id} width="180px"/>}
-            {dogDetail.hasOwnProperty("bred_for") && <h3>BRED FOR {dogDetail.bred_for}</h3>}
-            {dogDetail.hasOwnProperty("breed_group") && <h3>BREED GROUP {dogDetail.breed_group}</h3>}
-            <h3>W I {dogDetail.weight.imperial}</h3>
-            <h3>W M {dogDetail.weight.metric}</h3>
-            <h3>H I {dogDetail.height.imperial}</h3>
-            <h3>H M {dogDetail.height.metric}</h3>
-            <h3>LIFE SPAN {dogDetail.life_span}</h3>
-            <h3>TEMPERAMENT {dogDetail.temperament}</h3>
-            {dogDetail.hasOwnProperty('description') && <p>{dogDetail.description}</p>}
+            <h1 id="dog-name-responsive">"{dogDetail.name}"</h1>
+            <div className="detail-container">
+              <div className="image-n-name">
+              <div className="picture">
+              {
+                dogDetail.image && 
+                <img src={`${dogDetail.image.url}`} alt={dogDetail.image_id} width="300px"/>
+              }
+              </div>
+              <div className="info">
+                <h1 id="dog-name">"{dogDetail.name}"</h1>
+                <ul>
+                  {dogDetail.breed_group && <li>Breed type: {dogDetail.breed_group}</li>}
+                  <li>Weight: {dogDetail.weight.metric} kg / {dogDetail.weight.imperial} pounds</li>
+                  <li>Height: {dogDetail.height.metric} centimeters / {dogDetail.height.imperial} inches</li>
+                  <li>Life span: {dogDetail.life_span}</li>
+                  {dogDetail.bred_for && <li>Bred for: {dogDetail.bred_for}</li>}
+                  {
+                    dogDetail.temperament && 
+                    <li>Temperament{dogDetail.temperament.split(", ").length > 1 ? "s" : ""}: {dogDetail.temperament}.</li>
+                  }
+                </ul>
+              </div>
+              </div>
+              {
+                dogDetail.description && 
+                <div className="dog-description">
+                  <p>{dogDetail.description}</p>
+                </div>
+              }
+            </div>
           </>
         ) : (
           <div className="loader-position">
@@ -42,6 +64,8 @@ const DogDetail = ({ id }) => {
           </div>
         )
       }
+      </div>
+      <Footer />
     </div>
   )
 }

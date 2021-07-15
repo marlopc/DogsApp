@@ -1,99 +1,118 @@
 import './CreateDog.css';
 import NavBar from '../nav_bar/NavBar';
+import Footer from '../footer/Footer';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { getTemperaments } from '../../actions';
 import axios from 'axios';
 
-const validate = (input) => {
-  let errors = {};
+const validate = (input, source, errors) => {
+  let updatedErrors = { ...errors };
 
   const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/;
   const regexUrl = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/
 
-  if(!input.name.trim()) {
-    errors.name = `field "name" is required`;
-  } else if(!regexName.test(input.name.trim())) {
-    errors.name = `field "name" only allows letters and whitespaces`;
-  } else if(errors.name) {
-    delete errors.name;
+  if(source === 'name' || source === 'submit'){
+    if(!input.name.trim()) {
+      updatedErrors.name = `field "name" is required`;
+    } else if(!regexName.test(input.name.trim())) {
+      updatedErrors.name = `field "name" only allows letters and whitespaces`;
+    } else if(updatedErrors.name) {
+      delete updatedErrors.name;
+    }
   }
 
-  if(!input.weight_min.trim()) {
-    errors.weight_min = `field "weight" is required`;
-  } else if(isNaN(input.weight_min.trim())) {
-    errors.weight_min = `field "min weight" only allows numbers`;
-  } else if(input.weight_min.trim().length > 3) {
-    errors.weight_min = `field "min weight" only allows max 3 digits`;
-  } else if(errors.weight_min) {
-    delete errors.weight_min;
+  if(source === 'weight_min' || source === 'submit'){
+    if(!input.weight_min.trim()) {
+      updatedErrors.weight_min = `field "min weight" is required`;
+    } else if(isNaN(input.weight_min.trim())) {
+      updatedErrors.weight_min = `field "min weight" only allows numbers`;
+    } else if(input.weight_min.trim().length > 3) {
+      updatedErrors.weight_min = `field "min weight" only allows max 3 digits`;
+    } else if(updatedErrors.weight_min) {
+      delete updatedErrors.weight_min;
+    }
   }
 
-  if(!input.weight_max.trim()) {
-    errors.weight_max = `field "weight" is required`;
-  } else if(isNaN(input.weight_max.trim())) {
-    errors.weight_max = `field "max weight" only allows numbers`;
-  } else if(input.weight_max.trim().length > 3) {
-    errors.weight_max = `field "max weight" only allows max 3 digits`;
-  } else if(errors.weight_max) {
-    delete errors.weight_max;
+  if(source === 'weight_max' || source === 'submit'){
+    if(!input.weight_max.trim()) {
+      updatedErrors.weight_max = `field "max weight" is required`;
+    } else if(isNaN(input.weight_max.trim())) {
+      updatedErrors.weight_max = `field "max weight" only allows numbers`;
+    } else if(input.weight_max.trim().length > 3) {
+      updatedErrors.weight_max = `field "max weight" only allows max 3 digits`;
+    } else if(updatedErrors.weight_max) {
+      delete updatedErrors.weight_max;
+    }
   }
 
-  if(!input.height_min.trim()) {
-    errors.height_min = `field "height" is required`;
-  } else if(isNaN(input.height_min.trim())) {
-    errors.height_min = `field "min height" only allows numbers`;
-  } else if(input.weight_min.trim().length > 3) {
-    errors.height_min = `field "min height" only allows max 3 digits`;
-  } else if(errors.height_min) {
-    delete errors.height_min;
+  if(source === 'height_min' || source === 'submit'){
+    if(!input.height_min.trim()) {
+      updatedErrors.height_min = `field "min height" is required`;
+    } else if(isNaN(input.height_min.trim())) {
+      updatedErrors.height_min = `field "min height" only allows numbers`;
+    } else if(input.weight_min.trim().length > 3) {
+      updatedErrors.height_min = `field "min height" only allows max 3 digits`;
+    } else if(updatedErrors.height_min) {
+      delete updatedErrors.height_min;
+    }
   }
 
-  if(!input.height_max.trim()) {
-    errors.height_max = `field "height" is required`;
-  } else if(isNaN(input.height_max.trim())) {
-    errors.height_max = `field "max height" only allows numbers`;
-  } else if(input.height_max.trim().length > 3) {
-    errors.height_max = `field "max height" only allows max 3 digits`;
-  } else if(errors.height_max) {
-    delete errors.height_max;
+  if(source === 'height_max' || source === 'submit'){
+    if(!input.height_max.trim()) {
+      updatedErrors.height_max = `field "max height" is required`;
+    } else if(isNaN(input.height_max.trim())) {
+      updatedErrors.height_max = `field "max height" only allows numbers`;
+    } else if(input.height_max.trim().length > 3) {
+      updatedErrors.height_max = `field "max height" only allows max 3 digits`;
+    } else if(updatedErrors.height_max) {
+      delete updatedErrors.height_max;
+    }
   }
 
-  if(!input.life_span) {
-    delete errors.life_span;
-  } else if(isNaN(input.life_span.trim())) {
-    errors.life_span = `field "life span" only allows numbers`;
-  } else if(input.life_span.length > 2) {
-    errors.life_span = `field "life span" only allows max 2 digits`;
-  } else if(errors.life_span) {
-    delete errors.life_span;
+  if(source === 'life_span' || source === 'submit'){
+    if(!input.life_span) {
+      delete updatedErrors.life_span;
+    } else if(isNaN(input.life_span.trim())) {
+      updatedErrors.life_span = `field "life span" only allows numbers`;
+    } else if(input.life_span.length > 2) {
+      updatedErrors.life_span = `field "life span" only allows max 2 digits`;
+    } else if(updatedErrors.life_span) {
+      delete updatedErrors.life_span;
+    }
   }
 
-  if(input.temperament.length === 0) {
-    delete errors.temperament;
-  } else if(input.temperament.length > 12) {
-    errors.temperament = `a breed can not have more than 12 "temperaments"`;
-  } else if(errors.temperament){
-    delete errors.temperament;
+  if(source === 'temperament' || source === 'submit'){
+    if(input.temperament.length === 0) {
+      delete updatedErrors.temperament;
+    } else if(input.temperament.length > 12) {
+      updatedErrors.temperament = `a breed can not have more than 12 "temperaments", remove any to continue`;
+    } else if(updatedErrors.temperament){
+      delete updatedErrors.temperament;
+    }
   }
 
-  if(!input.description) {
-    delete errors.description;
-  } else if(input.description.length > 5000) {
-    errors.description = `description field can not have more than 5000 characters`;
-  } else if(errors.description) {
-    delete errors.description;
+  if(source === 'description' || source === 'submit'){
+    if(!input.description) {
+      delete updatedErrors.description;
+    } else if(input.description.length > 2500) {
+      updatedErrors.description = `description field can not have more than 2500 characters`;
+    } else if(updatedErrors.description) {
+      delete updatedErrors.description;
+    }
   }
 
-  if(!input.image_url) {
-    delete errors.image_url;
-  } else if(!regexUrl.test(input.image_url)) {
-    errors.image_url = `invalid image url`;
-  } else if(errors.image_url) {
-    delete errors.image_url;
+  if(source === 'image_url' || source === 'submit'){
+    if(!input.image_url) {
+      delete updatedErrors.image_url;
+    } else if(!regexUrl.test(input.image_url)) {
+      updatedErrors.image_url = `invalid image url`;
+    } else if(updatedErrors.image_url) {
+      delete updatedErrors.image_url;
+    }
   }
 
-  return errors;
+  return updatedErrors;
 };
 
 const converter = (from, type, min, max) => {
@@ -128,7 +147,7 @@ const CreateDog = () => {
 
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
-  const [temperamentSelect, setTemperamentSelect] = useState("");
+  const [temperamentSelect, setTemperamentSelect] = useState("Select");
   const [imageUrlPreview, setImageUrlPreview] = useState(null)
 
   const handleSubmit = (e) => {
@@ -141,11 +160,17 @@ const CreateDog = () => {
         name,
         description,
         life_span: `${life_span} years`,
-        temperament,
+        temperament: temperament.map(el => el.id),
         image_url
       }
-      axios.post("http://localhost:3001/dog", body);
+      axios.post("http://localhost:3001/dog", body, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        }
+      });
       setForm(initialForm);
+      setImageUrlPreview(null);
       alert("se envio el form");
     }
   }
@@ -162,11 +187,13 @@ const CreateDog = () => {
       ...form,
       [e.target.name]: e.target.value
     });
+  }
 
+  const handleBlur = (e) => {
     setErrors(validate({
       ...form,
       [e.target.name]: e.target.value
-    }))
+    }, e.target.name, errors))
   }
 
   const handleRadioChange = (e) => {
@@ -179,75 +206,219 @@ const CreateDog = () => {
     }
 
     setForm({
-        ...form,
-        imperial: false,
-        metric: true
-      });
+      ...form,
+      imperial: false,
+      metric: true
+    });
   }
 
   const handleTemperament = (e) => {
     setTemperamentSelect(e.target.value);
-    if(form.temperament.includes(e.target.value)) {
+    const [ id, name ] = e.target.value.split("&"); 
+
+    if(form.temperament.some(el => el.id === id)) {
       return;
     }
+
     setForm({
       ...form,
-      temperament: [...form.temperament, e.target.value]
+      temperament: [...form.temperament, {
+        id,
+        name
+      }]
     })
+
     setErrors(validate({
       ...form,
-      temperament: [...form.temperament, e.target.value]
-    }))
+      temperament: [...form.temperament, {
+        id,
+        name
+      }]
+    }, e.target.name, errors))
   }
 
   const handleImageChange = (e) => {
     handleChange(e);
+
     setTimeout(() => {
-      setImageUrlPreview(e.target.value)
-    }, 2500);
+      setImageUrlPreview(e.target.value);
+    }, 1000);
+  }
+
+  const handleRemove = (e) => {
+    setForm({
+      ...form,
+      temperament: form.temperament.filter(el => el.id !== e.target.title)
+    })
+    setErrors(validate({
+      ...form,
+      temperament: form.temperament.filter(el => el.id !== e.target.title)
+    }, "temperament", errors))
   }
 
   return (
-    <div>
+    <div className="page-form">
       <NavBar/>
-      <form onSubmit={handleSubmit}>
-        <input type="text" name="name" onChange={handleChange} value={form.name}></input>
-        <div>
-          <label>
-            <input type="radio" value="metric" checked={form.metric} onChange={handleRadioChange}/>
-            Metrical
-          </label>
-          <label>
-            <input type="radio" value="imperial" checked={form.imperial} onChange={handleRadioChange}/>
-            Imperial
-          </label>
-        </div>
-        <input type="text" placeholder="Min weight" name="weight_min" onChange={handleChange} value={form.weight_min}></input>
-        <input type="text" placeholder="Max weight" name="weight_max" onChange={handleChange} value={form.weight_max}></input>
-        <input type="text" placeholder="Min height" name="height_min" onChange={handleChange} value={form.height_min}></input>
-        <input type="text" placeholder="Max height" name="height_max" onChange={handleChange} value={form.height_max}></input>
-        <input type="text" placeholder="Life span" name="life_span" onChange={handleChange} value={form.life_span}></input>
-        <select value={temperamentSelect} onChange={handleTemperament}>
-          {
-            [...stateTemperaments]
-              .sort((a, b) => {
-                if(a.name > b.name) {
-                  return 1;
-                }
-                if(b.name > a.name) {
-                  return -1;
-                }
-                return 0;
+      <h1>CREATE A DOG</h1>
+      <div className="form-dog-container">
+        <form onSubmit={handleSubmit} className="form-dog">
+          <div className="input-form input-name">
+            <label htmlFor="name">Dog name*</label>
+            <input type="text" 
+              name="name" 
+              placeholder="Choose a name..." 
+              onChange={handleChange} 
+              onBlur={handleBlur} 
+              value={form.name} 
+              required
+            />
+            {errors.name && <p>{errors.name}</p>}
+          </div>
+          <div className="input-form input-radio">
+            <label>
+              <input 
+                type="radio"
+                value="metric" 
+                checked={form.metric} 
+                onChange={handleRadioChange}
+              />
+              cm / kg 
+            </label>
+            <label>
+              <input 
+                type="radio" 
+                value="imperial" 
+                checked={form.imperial} 
+                onChange={handleRadioChange}
+              />
+              inch / pound 
+            </label>
+          </div>
+          <div className="input-form input-we-he">
+            <label>Weight*</label>
+            <input 
+              type="text" 
+              placeholder="Min" 
+              name="weight_min" 
+              onBlur={handleBlur} 
+              onChange={handleChange} 
+              value={form.weight_min} 
+              required
+            />
+            <small>-</small> 
+            <input 
+              type="text" 
+              placeholder="Max" 
+              name="weight_max" 
+              onBlur={handleBlur} 
+              onChange={handleChange} 
+              value={form.weight_max} 
+              required
+            />
+            {errors.weight_min && <p>{errors.weight_min}</p>}
+            {errors.weight_max && <p>{errors.weight_max}</p>}
+          </div>
+          <div className="input-form input-we-he">
+            <label>Height* </label>
+            <input 
+              type="text" 
+              placeholder="Min" 
+              name="height_min" 
+              onBlur={handleBlur} 
+              onChange={handleChange} 
+              value={form.height_min} 
+              required
+            />
+            <small>-</small>            
+            <input 
+              type="text" 
+              placeholder="Max" 
+              name="height_max" 
+              onBlur={handleBlur} 
+              onChange={handleChange}
+              value={form.height_max} 
+              required
+            />
+            {errors.height_min && <p>{errors.height_min}</p>}
+            {errors.height_max && <p>{errors.height_max}</p>}
+          </div>
+          <div className="input-form input-lifespan">
+            <label>Life span</label>
+            <input 
+              type="text" 
+              placeholder="Life span" 
+              name="life_span" 
+              onBlur={handleBlur} 
+              onChange={handleChange} 
+              value={form.life_span}
+            />
+            {errors.life_span && <p>{errors.life_span}</p>}
+          </div>
+          <div className="input-form input-temperament">
+            <label>Temperament</label>
+            <select name="temperament" value={temperamentSelect} onChange={handleTemperament}>
+              {
+                [...stateTemperaments]
+                .sort((a, b) => {
+                  if(a.name > b.name) {
+                    return 1;
+                  }
+                  if(b.name > a.name) {
+                    return -1;
+                  }
+                  return 0;
+                })
+                .map(temperament => {
+                return (<option 
+                  value={`${temperament.id}&${temperament.name}`} 
+                  key={temperament.id}>{temperament.name}
+                </option>)
               })
-              .map(temperament => <option value={temperament.id} key={temperament.id}>{temperament.name}</option>)
+            }
+            </select>
+          </div>
+          <div className="input-form input-imageurl">
+            <label>Image url </label>
+            <input type="text" placeholder="Set a image" name="image_url" onBlur={handleBlur} onChange={handleImageChange} value={form.image_url}></input>
+            {errors.image_url && <p>{errors.image_url}</p>}
+          </div>
+          <div className="input-description">
+          <textarea placeholder="Write a description" name="description" onBlur={handleBlur} onChange={handleChange} value={form.description} style={{resize:"none"}}/>
+          {errors.description && <p>{errors.description}</p>}
+          </div>
+          <input className="input-submit" type="submit" value="Create"/>
+          <hr></hr>
+          <small>* required</small>
+        </form>
+        <div className="preview-temp-container">
+          <div className="picture-preview">
+            <img src={!errors.image_url ? imageUrlPreview : null} alt="Preview" className="img-preview"></img>
+          </div>
+          <div className="horizontal-div-preview"></div>
+          <div className="temp">
+          {
+            form.temperament.map(el => (
+              <div key={`${el.id + el.name}`} className="li-temperament">
+                <div className="position-button">
+                  <small>{el.name}</small>
+                  <span title={el.id} onClick={handleRemove}>x</span>
+                </div>
+              </div>
+            )).slice(0, 15)
           }
-        </select>
-        <img src={imageUrlPreview} alt="preview" width="200px"></img>
-        <input type="text" placeholder="Image url" name="image_url" onChange={handleImageChange} value={form.image_url}></input>
-        <textarea name="description" onChange={handleChange} value={form.description}/>
-        <input type="submit" />
-      </form>
-    </div>
+          {
+            form.temperament.length > 15 &&
+            <div className="more">...</div>
+          }
+          </div>
+          {
+            errors.temperament && 
+            <p>{errors.temperament}</p>
+          }
+        </div>
+      </div>
+    <Footer />
+  </div>
   )
 }
 

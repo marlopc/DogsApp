@@ -5,15 +5,15 @@
   height: 100%;
   justify-content: space-evenly;
   align-items: flex-start;
+  width: 98vw;
 }
 
 .filters {
   box-sizing: border-box;
-  border: 1px solid black;
-  margin: calc(87px + 2vh) 0 0;
+  margin: calc(86px + 2vh) 0 0;
   background-color: #ffedd8;
   width: 30%;
-  height: 60vh;
+  height: 30vh;
 }
 
 .page {
@@ -21,6 +21,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: 78.5vh;
 }
 
 .results {
@@ -34,6 +35,7 @@
 @media screen and (max-width: 920px) {
   .search-wrapper {
     flex-direction: column;
+    width: 97%;
   }
 
   .filters,
@@ -44,7 +46,7 @@
   .filters {
     margin: 0;
     padding: 0;
-    height: 20vh;
+    height: 30vh;
   }
 
   .results {

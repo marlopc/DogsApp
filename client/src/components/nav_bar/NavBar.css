@@ -1,7 +1,7 @@
 .nav-container {
   display: flex;
   justify-content: space-between;
-  padding: 0px 20px;
+  padding: 5px 20px;
   background-color: #d4a276;
   border-bottom: 1.5px solid #6f4518;
   align-items: center;
@@ -14,8 +14,10 @@
 }
 
 .go-home {
-  font-family: "Quite Magical", sans-serif;
-  font-size: 23px;
+  /* font-family: "Quite Magical", sans-serif; */
+  font-family: "Cabin", sans-serif;
+  /* font-size: 23px; */
+  font-size: 18px;
   padding-left: 6px;
   position: relative;
   right: 0;
@@ -42,8 +44,9 @@
 }
 
 .create-dog {
-  font-family: "Quite Magical", cursive;
-  font-size: 40px;
+  font-family: "Cabin", sans-serif;
+  font-size: 18px;
+  padding-top: 10px;
 }
 
 .links-container {
@@ -60,8 +63,9 @@
 }
 
 .about {
-  font-family: "Quite Magical", cursive;
-  font-size: 40px;
+  font-family: "Cabin", sans-serif;
+  font-size: 18px;
+  padding-top: 10px;
 }
 
 .create-dog:hover {
@@ -77,13 +81,13 @@
     transform: rotate(0deg);
   }
   25% {
-    transform: rotate(5deg);
+    transform: rotate(3deg);
   }
   50% {
     transform: rotate(0deg);
   }
   75% {
-    transform: rotate(-5deg);
+    transform: rotate(-3deg);
   }
   100% {
     transform: rotate(0deg);
@@ -107,7 +111,7 @@
   }
 
   .create-dog {
-    padding: 5px 0 0 4.5vw;
+    padding: 5px 1vw 0 0;
   }
 
   .about {

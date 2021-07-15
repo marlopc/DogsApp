@@ -1,0 +1,49 @@
+.footer-container {
+  clear: both;
+  position: relative;
+  height: 200px;
+  margin-top: -200px;
+  background-color: #a47148;
+  border-top: 3px solid #6f4518;
+  margin-top: 5px;
+  display: flex;
+  align-items: center;
+}
+
+.img-n-nav-container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-family: "Cabin", sans-serif;
+  margin-left: 20px;
+  color: #6f4518;
+}
+
+.ul-nav {
+  list-style: none;
+}
+
+.ul-nav li {
+  margin-top: 2px;
+}
+
+.navigation-footer h5 {
+  margin: 10px 0;
+  text-align: center;
+  color: #583101;
+}
+
+.logo-footer {
+  height: 80px;
+}
+
+.vertical-div-footer {
+  background-color: #6f4518;
+  margin: 5px 0 0 20px;
+  width: 1px;
+  height: 130px;
+}
+
+.active-link {
+  color: red;
+}

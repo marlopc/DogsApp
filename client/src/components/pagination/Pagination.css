@@ -1,4 +1,4 @@
-.search-bar-container {
+.pagination-ctrl-container {
   display: flex;
   padding: 30px 0 10px;
   justify-content: center;
@@ -6,14 +6,14 @@
   height: 46px;
 }
 
-.search-bar-container strong {
+.pagination-ctrl-container strong {
   color: #603808;
   padding-top: 0px;
   font-size: 40px;
   font-family: "Quite Magical", sans-serif;
 }
 
-.search-bar-container strong::selection {
+.pagination-ctrl-container strong::selection {
   color: #603808;
   background-color: transparent;
 }
@@ -23,15 +23,18 @@
 }
 
 .nav-buttons {
+  box-sizing: border-box;
   text-align: center;
   border-radius: 10px;
   background-color: #a47148;
+  color: #603808;
   border: 2px solid #8b5e34;
   width: 30px;
   height: 30px;
   font-family: "Quite Magical", sans-serif;
-  font-size: 28px;
+  font-size: 25px;
   text-decoration: none;
+  margin-top: 12%;
 }
 
 .nav-buttons::selection {
@@ -72,7 +75,7 @@
 }
 
 @media screen and (max-width: 920px) {
-  .search-bar-container {
+  .pagination-ctrl-container {
     padding: 5vh 0 2vh;
   }
 
@@ -84,10 +87,10 @@
   .nav-buttons {
     width: 40px;
     height: 40px;
-    font-size: 40px;
+    font-size: 35px;
   }
 
-  .search-bar-container strong {
+  .pagination-ctrl-container strong {
     display: none;
   }
 }

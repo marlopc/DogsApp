@@ -1,3 +1,93 @@
 .loader-position {
   padding-top: 12vh;
 }
+
+.image-n-name {
+  display: flex;
+  justify-content: space-around;
+  width: 95%;
+}
+
+.info h1 {
+  width: 100%;
+  text-align: center;
+}
+
+.picture {
+  background-color: white;
+  padding: 15px 15px 60px 15px;
+  box-shadow: 0px 5px 8px #6f4518;
+  height: 400px;
+  width: 400px;
+}
+
+.picture img {
+  width: 400px;
+  height: 380px;
+  object-fit: cover;
+}
+
+.detail-background {
+  width: 80%;
+  font-family: "Cabin", sans-serif;
+  color: #6f4518;
+  padding: 20px;
+  margin: 0 auto;
+}
+
+.detail-container {
+  padding: 20px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+}
+
+#dog-name {
+  font-size: 40px;
+}
+
+#dog-name-responsive {
+  display: none;
+  width: 100%;
+  text-align: center;
+}
+
+.dog-description {
+  margin-top: 20px;
+}
+
+@media screen and (max-width: 920px) {
+  #dog-name {
+    display: none;
+  }
+
+  #dog-name-responsive {
+    display: inline-block;
+  }
+
+  .image-n-name {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-n-name ul {
+    margin-top: 5vh;
+  }
+
+  .picture img {
+    width: 300px;
+    height: 280px;
+    object-fit: cover;
+  }
+
+  .picture {
+    height: 300px;
+    width: 300px;
+  }
+
+  .detail-container {
+    padding: 0;
+  }
+}

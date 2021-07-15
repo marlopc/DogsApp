@@ -76,7 +76,7 @@
 .footer a:active,
 .footer a:hover {
   color: #a47148;
-  font-family: "Quite Magical", sans-serif;
+  font-family: "Cabin", sans-serif;
   font-size: 16px;
   text-decoration-line: none;
 }
@@ -84,7 +84,7 @@
 .footer small {
   margin-left: 0.5%;
   color: #a47148;
-  font-family: "Quite Magical", sans-serif;
+  font-family: "Cabin", sans-serif;
   font-size: 16px;
 }
 

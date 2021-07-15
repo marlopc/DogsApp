@@ -23,12 +23,7 @@ const getDogs = (req, res, next) => {
 
       dbRes = dbDataHandler(dbRes);
       apiRes = apiDataHandler(apiRes);
-
-      const result = [...apiRes,...dbRes]
-
-      const found = result.length ? true : false;
-
-      return res.send({found, result});
+      return res.send([...apiRes,...dbRes]);
     })
     .catch(error => next(error));
 };

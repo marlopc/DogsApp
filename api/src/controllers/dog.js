@@ -24,7 +24,7 @@ const addDog = (req, res, next) => {
 
   Dog.create(newBreed)
     .then(newBreed => {
-      newBreed.setTemperaments(temperament)
+      newBreed.setTemperaments(temperament);
       res.send(newBreed);
     })
     .catch(error => next(error))

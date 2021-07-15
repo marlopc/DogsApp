@@ -11,7 +11,7 @@ function App() {
       <Route exact path="/" component={LandingPage}/>
       <Route exact path="/home" component={Home}/>
       <Route exact path="/detail/id=:id" render={({ match }) => <DogDetail id={match.params.id}/>}/>
-      <Route exact path="/create-dog" render={() => <CreateDog/>}/>
+      <Route exact path="/create-dog" component={CreateDog}/>
       <Redirect from="/home*" to="/home"/>
       <Route path="*" component={Loader} />
     </Switch>

@@ -7,7 +7,7 @@
   flex-direction: column;
   justify-content: space-evenly;
   margin: 2vh;
-  background-color: #a47148;
+  background-color: #bc8a5f;
 }
 
 .item-container:hover {
@@ -18,17 +18,28 @@
   width: 100%;
   height: 400px;
   object-fit: cover;
+  border-bottom: 1px solid #6f4518;
+  filter: brightness(90%);
+}
+
+.item-container img::selection {
+  background-color: transparent;
+}
+
+.item-container:hover img {
+  filter: brightness(105%);
 }
 
 .dog-info {
   display: flex;
   flex-direction: column;
-  height: 10vh;
+  height: 12vh;
   margin: 0 auto;
   width: 80%;
   text-align: center;
   justify-content: space-around;
-  color: #ffedd8;
+  color: #6f4518;
+  font-family: "Cabin", sans-serif;
 }
 
 .dog-info h2 {

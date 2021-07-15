@@ -1,32 +1,41 @@
-import './Home.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import NavBar from '../nav_bar/NavBar';
-import DogItem from '../dog_item/DogItem';
-import PageCarrousel from '../page_carrousel/PageCarrousel';
-import SearchFilters, { getSortingCb } from '../search_filters/SearchFilters';
-import { getDogs, getTemperaments } from '../../actions';
-import Loader from '../loader/Loader';
+import { getDogs, getTemperaments, setDefault, setPages } from '../../actions';
+import { getSortCb } from '../../helpers/getSortCb';
 import NotFoundError from '../not_found_error/NotFoundError';
+import SearchFilters from '../search_filters/SearchFilters';
+import Pagination from '../pagination/Pagination';
+import DogItem from '../dog_item/DogItem';
+import NavBar from '../nav_bar/NavBar';
+import Loader from '../loader/Loader';
+import Footer from '../footer/Footer';
+import './Home.css';
 
 const Home = () => {
   const [allDogs, setAllDogs] = useState([]);
-  const [pages, setPages] = useState(0);
-  const [sortType, setSortType] = useState("AA");
-  const [filter, setFilter] = useState("");
-  const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
-  const [userCreatedFilter, setUserCreatedFilter] = useState(false);
   const [loading, setLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
 
   const stateDogs = useSelector(state => state.dogs);
+  const statePage = useSelector(state => state.pagination.page);
+  const stateSortType = useSelector(state => state.filters.sortType);
+  const stateFilter = useSelector(state => state.filters.filter);
+  const stateUserCreatedFilter = useSelector(state => state.filters.userCreatedFilter);
+  const stateSearch = useSelector(state => state.filters.search);
+  const statePages = useSelector(state => state.pagination.pages);
   const dispatch = useDispatch();
   
   useEffect(() => {
-    dispatch(getDogs(search || null));
+    dispatch(setDefault());
     dispatch(getTemperaments());
-  }, [dispatch, search]);
+    dispatch(getDogs());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if(stateSearch) {
+      dispatch(getDogs(stateSearch));
+    }
+  }, [stateSearch, dispatch])
 
   useEffect(() => {
     if(!allDogs.length) {
@@ -40,37 +49,39 @@ const Home = () => {
 
   useEffect(() => {
     if(!loading) {
-      setAllDogs([...stateDogs].sort(getSortingCb(sortType)));
+      setAllDogs([...stateDogs].sort(getSortCb(stateSortType)));
     }
-  }, [sortType, stateDogs, loading])
+  }, [stateSortType, stateDogs, loading, stateFilter])
 
   useEffect(() => {
-    if(filter || userCreatedFilter) {
+    if(stateFilter || stateUserCreatedFilter) {
       const filtered = stateDogs.filter(dog => {
-        if(!filter || !dog.temperament) {
-          if(userCreatedFilter) {
+        if(!stateFilter || !dog.temperament) {
+          if(stateUserCreatedFilter) {
             return isNaN(dog.id)
           }
           return false;
         }
-        if(!filter || dog.temperament.includes(filter)) {
-          if(userCreatedFilter) {
+        if(!stateFilter || dog.temperament.includes(stateFilter)) {
+          if(stateUserCreatedFilter) {
             return isNaN(dog.id)
           }
           return true;
         }
         return false;
       });
-      setPages(Math.ceil(filtered.length / 8));
+      dispatch(setPages(Math.ceil(filtered.length / 8)));
       setAllDogs(filtered);
     } else {
-      setPages(Math.ceil(stateDogs.length / 8));
+      dispatch(setPages(Math.ceil(stateDogs.length / 8)));
       setAllDogs(stateDogs);
     }
   }, [
     stateDogs, 
-    filter,
-    userCreatedFilter
+    stateFilter,
+    stateUserCreatedFilter,
+    dispatch,
+    statePages
   ]);
   
   return (
@@ -78,32 +89,16 @@ const Home = () => {
       <NavBar />
       <section className="search-wrapper">
         <div className="filters">
-          <SearchFilters 
-            setSortType={setSortType} 
-            sortType={sortType} 
-            userCreatedFilter={userCreatedFilter} 
-            setUserCreatedFilter={setUserCreatedFilter}
-            setFilter={setFilter}
-            filter={filter}
-            setSearch={setSearch}
-            setPage={setPage}
-            search={search}
-          />
+          <SearchFilters />
         </div>
         <article className="page">
-          <PageCarrousel 
-            pages={pages} 
-            search={search} 
-            page={page}
-            filter={filter}
-            setPage={setPage}
-          />
+          <Pagination />
           <div className="results">
             { 
               loading ? (
                 <Loader />
               ) : (noResults ? (
-                  <NotFoundError/>
+                  <NotFoundError setLoading={setLoading}/>
                 ) : (
                   allDogs.map(dog => 
                     <DogItem 
@@ -113,20 +108,15 @@ const Home = () => {
                       id={dog.id}
                       key={dog.id}
                     />
-                  ).slice(page * 8 - 8, page * 8)
+                  ).slice(statePage * 8 - 8, statePage * 8)
                 )
               ) 
             }
           </div>
-          <PageCarrousel 
-            pages={pages} 
-            search={search} 
-            page={page}
-            filter={filter}
-            setPage={setPage}
-          />
+          <Pagination />
         </article>
       </section>
+      <Footer />
     </div>
   )
 }
