@@ -35,17 +35,10 @@ const { Dog, Temperament } = sequelize.models;
 // Aca vendrian las relaciones
 // Product.hasMany(Reviews);
 Dog.belongsToMany(Temperament, {
-  through: 'dog_temperament',
-  foreignKey: 'dogId',
-  otherKey: 'temperamentId'
+  through: 'dog_temperament'
 });
 Temperament.belongsToMany(Dog, {
-  through: 'dog_temperament',
-  foreignKey: {
-    name: 'temperamentId',
-    allowNull: false
-  },
-  otherKey: 'dogId'
+  through: 'dog_temperament'
 });
 
 module.exports = {

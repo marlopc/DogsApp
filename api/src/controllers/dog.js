@@ -30,6 +30,20 @@ const addDog = (req, res, next) => {
     .catch(error => next(error))
 }
 
+const deleteDog = (req, res, next) => {
+  const { id } = req.body;
+
+  Dog.destroy({where: {id}})
+    .then(() => {
+      return res.send({deleteStatus: "dog successfully removed"})
+    })
+    .catch(err => {
+      res.send({deleteStatus: err});
+      next(err);
+    })
+}
+
 module.exports = {
-  addDog
+  addDog,
+  deleteDog
 }

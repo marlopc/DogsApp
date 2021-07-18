@@ -9,6 +9,7 @@ import {
   setUserCreatedFilter, 
   setSearchInput 
 } from '../../actions';
+import { getSortCb } from '../../helpers/getSortCb';
 
 const SearchFilters = () => {
   const [temperaments, setTemperaments] = useState([]);
@@ -61,11 +62,12 @@ const SearchFilters = () => {
           onChange={handleChange} 
           placeholder="Search by breed"
           className="search-input"
-          />
-          <input className="search-submit" type="submit" value=">"/>
+        />
+        <input className="search-submit" type="submit" value=">"/>
       </form>
       <label htmlFor="sort">Sort:</label>
       <select name="sort" value={stateSortType} onChange={handleSortChange} className="select-sort">
+        <option value="default" hidden={true}>Sort ⇅</option>
         <optgroup label="Alphabetically">
           <option value="AA">A {"<"} Z</option>
           <option value="AD">Z {"<"} A</option>
@@ -77,22 +79,20 @@ const SearchFilters = () => {
       </select>
       <label htmlFor="filter">Filter:</label>
       <select name="filter" value={stateFilter} onChange={handleFilter} className="select-temps">
-        <option name="placeholder" hidden="hidden" value="">Filter</option>
+        <option name="placeholder" hidden="hidden" value="">Filter 🜄</option>
         <option value="">None</option>
         <optgroup label="Temperament">
         {
           [...temperaments]
-          .sort((a, b) => {
-            if(a.name > b.name) {
-              return 1;
-            }
-              if(b.name > a.name) {
-                return -1;
-              }
-              return 0;
-            })
-            .map(temperament => <option value={temperament.name} key={temperament.id}>{temperament.name}</option>)
-          }
+            .sort(getSortCb("AA"))
+            .map(temperament => (
+              <option 
+                value={temperament.name} 
+                key={temperament.id}>
+                {temperament.name}
+              </option>
+            ))
+        }
         </optgroup>
       </select>
       <div>

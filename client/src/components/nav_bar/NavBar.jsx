@@ -16,7 +16,7 @@ const NavBar = () => {
 
   const handleGoHome = () => {
     dispatch(setDefault());
-    // dispatch(getDogs());
+    dispatch(getDogs());
   }
 
   return (

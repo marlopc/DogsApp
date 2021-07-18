@@ -18,7 +18,7 @@ const NotFoundError = ({ setLoading }) => {
         <img src="../../img/nf-help.png" alt="" width="200px"/>
       </div>
       <div className="help-text">
-        <h1>No results found that match your search</h1>
+        <h1>No results were found</h1>
         <ul>
           <li>Check if you misspelled your search</li>
           <li>Look in another temperament or filter</li>

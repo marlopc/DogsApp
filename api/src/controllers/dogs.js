@@ -1,7 +1,7 @@
 const { Dog, Temperament } = require('../db.js');
 const { BASE_URL, API_KEY } = require('../../constants');
 const axios = require('axios');
-const { Op } = require('sequelize');
+const { Op, AccessDeniedError } = require('sequelize');
 
 const getDogs = (req, res, next) => {
   const { name } = req.query;
@@ -55,23 +55,24 @@ const getDogById = (req, res, next) => {
 
 const apiDataHandler = apiResponse => {
   apiResponse = apiResponse.data;
-  return apiResponse.map(breed => {
-    return {
-      id: breed.id,
-      name: breed.name,
-      temperament: breed.temperament,
-      weight: breed.weight.imperial.split(" - ")[0],
-      image_url: breed.hasOwnProperty("image") 
-      ? breed.image.url 
-      : `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+  return apiResponse.reduce((acc, breed) => {
+    if(breed.image || breed.reference_image_id) {
+      acc.push({
+        id: breed.id,
+        name: breed.name,
+        temperament: breed.temperament,
+        weight: breed.weight.imperial.split(" - ")[0],
+        image_url: breed.hasOwnProperty("image") 
+        ? breed.image.url 
+        : `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+      })
     }
-  });
+    return acc; 
+  }, []);
 };
 
 const dbDataHandler = dbResponse => {
   if(dbResponse instanceof Array) {
-    dbResponse = JSON.stringify(dbResponse, getCircularReplacer());
-    dbResponse = JSON.parse(dbResponse);
     dbResponse = dbResponse.map(dog => {
       return {
         id: dog.id,
@@ -105,11 +106,10 @@ const dbDataHandler = dbResponse => {
       imperial: `${height[0]} - ${height[1]}`,
       metric: `${height[2]} - ${height[3]}`
     }
+
+    dbResponse = {...dbResponse, temperament};
     
-    return {
-      ...dbResponse,
-      temperament
-    }
+    return dbResponse;
   }
 };
 

@@ -5,10 +5,13 @@ import Loader from '../loader/Loader';
 import NavBar from '../nav_bar/NavBar';
 import Footer from '../footer/Footer';
 import './DogDetail.css';
+import axios from 'axios';
+import { useHistory } from 'react-router-dom';
 
 const DogDetail = ({ id }) => {
 
   const dispatch = useDispatch();
+  const history = useHistory();
   const dogDetail = useSelector(state => state.dogDetail);
 
   useEffect(() => {
@@ -18,6 +21,23 @@ const DogDetail = ({ id }) => {
   useEffect(() => {
     dispatch(getDogDetail(id))
   }, [dispatch, id]);
+
+  const handleDelete = () => {
+    const doubleCheck = window.confirm("Are you sure you want to permanently remove this dog?");
+    if(doubleCheck) {
+      const body = {id};
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      };
+      axios.delete('http://localhost:3001/dog', { data: body, headers })
+        .then(() => {
+          alert("Dog successfully removed");
+          history.push('/home');
+        })
+        .catch(err => alert("Error ocurred: " + err));
+    }
+  }
 
   return (
     <div>
@@ -32,7 +52,10 @@ const DogDetail = ({ id }) => {
               <div className="picture">
               {
                 dogDetail.image && 
-                <img src={`${dogDetail.image.url}`} alt={dogDetail.image_id} width="300px"/>
+                <img src={`${dogDetail.image.url}`} 
+                  onerror={`${dogDetail.image.url.slice(0, -4)}.png`} 
+                  alt={dogDetail.image_id} 
+                width="300px"/>
               }
               </div>
               <div className="info">
@@ -42,7 +65,10 @@ const DogDetail = ({ id }) => {
                   <li>Weight: {dogDetail.weight.metric} kg / {dogDetail.weight.imperial} pounds</li>
                   <li>Height: {dogDetail.height.metric} centimeters / {dogDetail.height.imperial} inches</li>
                   <li>Life span: {dogDetail.life_span}</li>
-                  {dogDetail.bred_for && <li>Bred for: {dogDetail.bred_for}</li>}
+                  {
+                    dogDetail.bred_for && 
+                    <li>Bred for: {dogDetail.bred_for}.</li>
+                  }
                   {
                     dogDetail.temperament && 
                     <li>Temperament{dogDetail.temperament.split(", ").length > 1 ? "s" : ""}: {dogDetail.temperament}.</li>
@@ -55,6 +81,10 @@ const DogDetail = ({ id }) => {
                 <div className="dog-description">
                   <p>{dogDetail.description}</p>
                 </div>
+              }
+              {
+                isNaN(dogDetail.id) &&
+                <span className="delete-btn" onClick={handleDelete}>Delete</span>
               }
             </div>
           </>

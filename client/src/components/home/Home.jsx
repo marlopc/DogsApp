@@ -48,9 +48,7 @@ const Home = () => {
   }, [allDogs]);
 
   useEffect(() => {
-    if(!loading) {
-      setAllDogs([...stateDogs].sort(getSortCb(stateSortType)));
-    }
+    setAllDogs([...stateDogs].sort(getSortCb(stateSortType)));
   }, [stateSortType, stateDogs, loading, stateFilter])
 
   useEffect(() => {
@@ -58,13 +56,13 @@ const Home = () => {
       const filtered = stateDogs.filter(dog => {
         if(!stateFilter || !dog.temperament) {
           if(stateUserCreatedFilter) {
-            return isNaN(dog.id)
+            return isNaN(dog.id);
           }
           return false;
         }
         if(!stateFilter || dog.temperament.includes(stateFilter)) {
           if(stateUserCreatedFilter) {
-            return isNaN(dog.id)
+            return isNaN(dog.id);
           }
           return true;
         }

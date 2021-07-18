@@ -42,5 +42,8 @@ const sorts = {
 }
 
 export const getSortCb = (sorting) => {
+  if(sorting === 'default') {
+    return sorts.AA;
+  }
   return sorts[sorting];
 }

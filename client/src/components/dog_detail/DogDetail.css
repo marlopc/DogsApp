@@ -31,7 +31,7 @@
   width: 80%;
   font-family: "Cabin", sans-serif;
   color: #6f4518;
-  padding: 20px;
+  padding: 20px 20px 100px;
   margin: 0 auto;
 }
 
@@ -56,6 +56,29 @@
 
 .dog-description {
   margin-top: 20px;
+}
+
+.delete-btn {
+  box-sizing: border-box;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #a47148;
+  color: #603808;
+  border: 2px solid #8b5e34;
+  width: 90px;
+  height: 30px;
+  padding-top: 5px;
+  font-size: 15px;
+  text-decoration: none;
+  margin-top: 12%;
+  cursor: pointer;
+}
+
+.delete-btn:hover {
+  background: #6f4518;
+  box-shadow: 3px 3px 3px #603808;
+  color: #a47148;
+  border-color: #603808;
 }
 
 @media screen and (max-width: 920px) {

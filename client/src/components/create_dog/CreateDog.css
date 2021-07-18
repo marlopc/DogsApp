@@ -5,7 +5,7 @@
 .page-form input[type="text"] {
   background-color: transparent;
   border: none;
-  border-bottom: 2px solid #6f4518;
+  border-bottom: 1.5px solid #6f4518;
 }
 
 .page-form h1 {
@@ -100,10 +100,11 @@
 }
 
 .input-description textarea {
+  resize: none;
   background-color: #d4a276;
   border: 1px solid #6f4518;
   width: 460px;
-  height: 200px;
+  height: 280px;
   font-family: "Cabin", sans-serif;
 }
 
@@ -120,6 +121,7 @@
   font-size: 20px;
   padding-top: 2px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .input-submit:hover {
@@ -165,7 +167,7 @@
   justify-content: center;
   align-content: flex-start;
   margin-top: 30px;
-  height: 200px;
+  height: 280px;
   max-height: 434px;
 }
 
@@ -174,7 +176,7 @@
   font-size: 25px;
 }
 
-@media screen and (max-width: 920px) {
+@media screen and (max-width: 1100px) {
   .form-dog,
   .preview-temp-container {
     width: 100%;
@@ -203,5 +205,11 @@
 
   .input-submit {
     width: 310px;
+  }
+
+  .error-temperament {
+    width: 85%;
+    text-align: center;
+    color: #ef3340;
   }
 }

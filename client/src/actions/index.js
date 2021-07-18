@@ -43,7 +43,7 @@ export function setDefault() {
         page: 1
       },
       filters: {
-        sortType: "AA",
+        sortType: "default",
         filter: "",
         search: "",
         searchInput: "",

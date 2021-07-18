@@ -127,7 +127,7 @@ const converter = (from, type, min, max) => {
     const maxImperial = Math.round(type === "height" ? max / 2.54 : max * 2.2);
     return `${minImperial}-${maxImperial}-${min}-${max}`
   }
-}
+};
 
 const CreateDog = () => {
 
@@ -148,7 +148,7 @@ const CreateDog = () => {
   const [form, setForm] = useState(initialForm);
   const [errors, setErrors] = useState({});
   const [temperamentSelect, setTemperamentSelect] = useState("Select");
-  const [imageUrlPreview, setImageUrlPreview] = useState(null)
+  const [imageUrlPreview, setImageUrlPreview] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -162,39 +162,41 @@ const CreateDog = () => {
         life_span: `${life_span} years`,
         temperament: temperament.map(el => el.id),
         image_url
-      }
-      axios.post("http://localhost:3001/dog", body, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json"
-        }
-      });
-      setForm(initialForm);
-      setImageUrlPreview(null);
-      alert("se envio el form");
+      };
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json"
+      };
+      axios.post("http://localhost:3001/dog", body, {headers})
+        .then(() => {
+          setForm(initialForm)
+          setImageUrlPreview(null);
+          alert("The dog has been successfully created");
+        })
+        .catch(() => alert("An error occurred while submitting the form"));
     }
   }
 
   const stateTemperaments = useSelector(state => state.temperaments);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getTemperaments());
-  }, [dispatch])
+  }, [dispatch]);
 
   const handleChange = (e) => {
     setForm({
       ...form,
       [e.target.name]: e.target.value
     });
-  }
+  };
 
   const handleBlur = (e) => {
     setErrors(validate({
       ...form,
       [e.target.name]: e.target.value
-    }, e.target.name, errors))
-  }
+    }, e.target.name, errors));
+  };
 
   const handleRadioChange = (e) => {
     if(e.target.value === "imperial") {
@@ -210,7 +212,7 @@ const CreateDog = () => {
       imperial: false,
       metric: true
     });
-  }
+  };
 
   const handleTemperament = (e) => {
     setTemperamentSelect(e.target.value);
@@ -226,7 +228,7 @@ const CreateDog = () => {
         id,
         name
       }]
-    })
+    });
 
     setErrors(validate({
       ...form,
@@ -234,8 +236,8 @@ const CreateDog = () => {
         id,
         name
       }]
-    }, e.target.name, errors))
-  }
+    }, e.target.name, errors));
+  };
 
   const handleImageChange = (e) => {
     handleChange(e);
@@ -243,18 +245,19 @@ const CreateDog = () => {
     setTimeout(() => {
       setImageUrlPreview(e.target.value);
     }, 1000);
-  }
+  };
 
   const handleRemove = (e) => {
+    const temperamentId = e.target.attributes.data.nodeValue;
     setForm({
       ...form,
-      temperament: form.temperament.filter(el => el.id !== e.target.title)
+      temperament: form.temperament.filter(el => el.id !== temperamentId)
     })
     setErrors(validate({
       ...form,
-      temperament: form.temperament.filter(el => el.id !== e.target.title)
+      temperament: form.temperament.filter(el => el.id !== temperamentId)
     }, "temperament", errors))
-  }
+  };
 
   return (
     <div className="page-form">
@@ -315,8 +318,14 @@ const CreateDog = () => {
               value={form.weight_max} 
               required
             />
-            {errors.weight_min && <p>{errors.weight_min}</p>}
-            {errors.weight_max && <p>{errors.weight_max}</p>}
+            {
+              errors.weight_min && 
+              <p>{errors.weight_min}</p>
+            }
+            {
+              errors.weight_max && 
+              <p>{errors.weight_max}</p>
+            }
           </div>
           <div className="input-form input-we-he">
             <label>Height* </label>
@@ -339,8 +348,14 @@ const CreateDog = () => {
               value={form.height_max} 
               required
             />
-            {errors.height_min && <p>{errors.height_min}</p>}
-            {errors.height_max && <p>{errors.height_max}</p>}
+            {
+              errors.height_min && 
+              <p>{errors.height_min}</p>
+            }
+            {
+              errors.height_max && 
+              <p>{errors.height_max}</p>
+            }
           </div>
           <div className="input-form input-lifespan">
             <label>Life span</label>
@@ -352,39 +367,49 @@ const CreateDog = () => {
               onChange={handleChange} 
               value={form.life_span}
             />
-            {errors.life_span && <p>{errors.life_span}</p>}
+            {
+              errors.life_span && 
+              <p>{errors.life_span}</p>
+            }
           </div>
           <div className="input-form input-temperament">
             <label>Temperament</label>
             <select name="temperament" value={temperamentSelect} onChange={handleTemperament}>
+            <option value="Select" hidden={true}>Select</option>
               {
                 [...stateTemperaments]
-                .sort((a, b) => {
-                  if(a.name > b.name) {
-                    return 1;
-                  }
-                  if(b.name > a.name) {
-                    return -1;
-                  }
-                  return 0;
-                })
-                .map(temperament => {
-                return (<option 
-                  value={`${temperament.id}&${temperament.name}`} 
-                  key={temperament.id}>{temperament.name}
-                </option>)
-              })
-            }
+                  .sort((a, b) => {
+                    if(a.name > b.name) {
+                      return 1;
+                    }
+                    if(b.name > a.name) {
+                      return -1;
+                    }
+                    return 0;
+                  })
+                  .map(temperament => {
+                  return (<option 
+                    value={`${temperament.id}&${temperament.name}`} 
+                    key={temperament.id}>{temperament.name}
+                  </option>)
+                  })
+              }
             </select>
           </div>
           <div className="input-form input-imageurl">
             <label>Image url </label>
-            <input type="text" placeholder="Set a image" name="image_url" onBlur={handleBlur} onChange={handleImageChange} value={form.image_url}></input>
-            {errors.image_url && <p>{errors.image_url}</p>}
+            <input type="text" placeholder="Set a image..." name="image_url" onBlur={handleBlur} onChange={handleImageChange} value={form.image_url}></input>
+            {
+              errors.image_url && 
+              <p>{errors.image_url}</p>
+            }
           </div>
           <div className="input-description">
-          <textarea placeholder="Write a description" name="description" onBlur={handleBlur} onChange={handleChange} value={form.description} style={{resize:"none"}}/>
-          {errors.description && <p>{errors.description}</p>}
+            <textarea placeholder="Write a description..." name="description" onBlur={handleBlur} onChange={handleChange} value={form.description}/>
+            {
+              errors.description && 
+              <p>{errors.description}</p>
+            }
           </div>
           <input className="input-submit" type="submit" value="Create"/>
           <hr></hr>
@@ -394,26 +419,26 @@ const CreateDog = () => {
           <div className="picture-preview">
             <img src={!errors.image_url ? imageUrlPreview : null} alt="Preview" className="img-preview"></img>
           </div>
-          <div className="horizontal-div-preview"></div>
+          <div className="horizontal-div-preview"/>
           <div className="temp">
-          {
-            form.temperament.map(el => (
-              <div key={`${el.id + el.name}`} className="li-temperament">
-                <div className="position-button">
-                  <small>{el.name}</small>
-                  <span title={el.id} onClick={handleRemove}>x</span>
+            {
+              form.temperament.map(el => (
+                <div key={`${el.id + el.name}`} className="li-temperament">
+                  <div className="position-button">
+                    <small>{el.name}</small>
+                    <span data={el.id} onClick={handleRemove}>x</span>
+                  </div>
                 </div>
-              </div>
-            )).slice(0, 15)
-          }
-          {
-            form.temperament.length > 15 &&
-            <div className="more">...</div>
-          }
+              )).slice(0, 15)
+            }
+            {
+              form.temperament.length > 15 &&
+              <div className="more">...</div>
+            }
           </div>
           {
             errors.temperament && 
-            <p>{errors.temperament}</p>
+            <p className="error-temperament">{errors.temperament}</p>
           }
         </div>
       </div>
