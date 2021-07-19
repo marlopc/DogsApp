@@ -23,7 +23,7 @@ const getDogs = (req, res, next) => {
 
       dbRes = dbDataHandler(dbRes);
       apiRes = apiDataHandler(apiRes);
-      return res.send([...apiRes,...dbRes]);
+      return res.status(200).send([...apiRes,...dbRes]);
     })
     .catch(error => next(error));
 };
@@ -40,14 +40,14 @@ const getDogById = (req, res, next) => {
     })
       .then(dbRes => {
         const searchResult = dbDataHandler(dbRes);
-        return res.send(searchResult);
+        return res.status(200).send(searchResult);
       })
       .catch(error => next(error));
   } else { 
     axios.get(`${BASE_URL}breeds?api_key=${API_KEY}`)
     .then(apiRes => {
       const searchResult = apiRes.data.find(dog => dog.id === parseInt(id));
-      return res.send(searchResult);
+      return res.status(200).send(searchResult);
     })
     .catch(error => next(error));
   }
@@ -87,6 +87,8 @@ const dbDataHandler = dbResponse => {
     dbResponse = JSON.stringify(dbResponse, getCircularReplacer());
     dbResponse = JSON.parse(dbResponse);
     
+    if(!dbResponse) return {};
+
     const temperament = dbResponse.temperaments.map(temperament => temperament.name).join(", ");
     dbResponse.image = {
       url: dbResponse.image_url

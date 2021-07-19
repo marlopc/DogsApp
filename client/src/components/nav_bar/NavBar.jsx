@@ -2,7 +2,7 @@ import './NavBar.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setDefault, getDogs } from '../../actions';
+import { setDefault, getDogs, setLoading } from '../../actions';
 
 const NavBar = () => {
 
@@ -15,6 +15,7 @@ const NavBar = () => {
   }
 
   const handleGoHome = () => {
+    dispatch(setLoading(true));
     dispatch(setDefault());
     dispatch(getDogs());
   }

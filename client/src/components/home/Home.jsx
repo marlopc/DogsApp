@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogs, getTemperaments, setDefault, setPages } from '../../actions';
+import { getDogs, getTemperaments, setDefault, setLoading, setPages } from '../../actions';
 import { getSortCb } from '../../helpers/getSortCb';
 import NotFoundError from '../not_found_error/NotFoundError';
 import SearchFilters from '../search_filters/SearchFilters';
@@ -13,10 +13,10 @@ import './Home.css';
 
 const Home = () => {
   const [allDogs, setAllDogs] = useState([]);
-  const [loading, setLoading] = useState(true);
   const [noResults, setNoResults] = useState(false);
 
   const stateDogs = useSelector(state => state.dogs);
+  const stateLoading = useSelector(state => state.loading);
   const statePage = useSelector(state => state.pagination.page);
   const stateSortType = useSelector(state => state.filters.sortType);
   const stateFilter = useSelector(state => state.filters.filter);
@@ -26,6 +26,7 @@ const Home = () => {
   const dispatch = useDispatch();
   
   useEffect(() => {
+    dispatch(setLoading(true));
     dispatch(setDefault());
     dispatch(getTemperaments());
     dispatch(getDogs());
@@ -35,21 +36,21 @@ const Home = () => {
     if(stateSearch) {
       dispatch(getDogs(stateSearch));
     }
-  }, [stateSearch, dispatch])
+  }, [stateSearch, dispatch]);
 
   useEffect(() => {
     if(!allDogs.length) {
       setNoResults(true);
     }
     else {
-      setLoading(false);
+      dispatch(setLoading(false));
       setNoResults(false);
     }
-  }, [allDogs]);
+  }, [allDogs, dispatch]);
 
   useEffect(() => {
     setAllDogs([...stateDogs].sort(getSortCb(stateSortType)));
-  }, [stateSortType, stateDogs, loading, stateFilter])
+  }, [stateSortType, stateDogs, stateLoading, stateFilter]);
 
   useEffect(() => {
     if(stateFilter || stateUserCreatedFilter) {
@@ -93,7 +94,7 @@ const Home = () => {
           <Pagination />
           <div className="results">
             { 
-              loading ? (
+              stateLoading ? (
                 <Loader />
               ) : (noResults ? (
                   <NotFoundError setLoading={setLoading}/>

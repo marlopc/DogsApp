@@ -39,6 +39,14 @@ const DogDetail = ({ id }) => {
     }
   }
 
+  let attempt = 0;
+  const addDefaultSrc = (e) => {
+    attempt++
+    if(attempt < 2) {
+      e.target.src = `${dogDetail.image.url.slice(0, -4)}.png`
+    }
+  } 
+
   return (
     <div>
       <NavBar />
@@ -53,7 +61,7 @@ const DogDetail = ({ id }) => {
               {
                 dogDetail.image && 
                 <img src={`${dogDetail.image.url}`} 
-                  onerror={`${dogDetail.image.url.slice(0, -4)}.png`} 
+                  onError={addDefaultSrc} 
                   alt={dogDetail.image_id} 
                 width="300px"/>
               }

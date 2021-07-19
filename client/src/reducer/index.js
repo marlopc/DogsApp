@@ -2,6 +2,7 @@ const initialState = {
   temperaments: [],
   dogs: [],
   dogDetail: {},
+  loading: true,
   pagination: {
     pages: 0,
     page: 1
@@ -10,12 +11,11 @@ const initialState = {
     sortType: "AA",
     filter: "",
     search: "",
-    searchInput: "",
     userCreatedFilter: false
   }
 }
 
-const reducer = (state = initialState, {type, payload}) => {
+const reducer = (state = initialState, { type, payload }) => {
   switch(type) {
     case 'GET_TEMPERAMENTS':
       return {
@@ -33,6 +33,12 @@ const reducer = (state = initialState, {type, payload}) => {
       return {
         ...state,
         dogDetail: payload
+      }
+
+    case 'SET_LOADING':
+      return {
+        ...state,
+        loading: payload
       }
  
     case 'SET_DEFAULT_STATE':
@@ -66,15 +72,6 @@ const reducer = (state = initialState, {type, payload}) => {
         filters: {
           ...state.filters,
           search: payload
-        }
-      }
-
-    case 'SET_SEARCH_INPUT':
-      return {
-        ...state,
-        filters: {
-          ...state.filters,
-          searchInput: payload
         }
       }
 

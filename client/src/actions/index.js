@@ -88,16 +88,16 @@ export function setSearch(param) {
   };
 };
 
-export function setSearchInput(input) {
-  return {
-    type: "SET_SEARCH_INPUT",
-    payload: input
-  }
-}
-
 export function setUserCreatedFilter(boolean) {
   return {
     type: "SET_USER_CREATED_FILTER",
+    payload: boolean
+  };
+};
+
+export function setLoading(boolean) {
+  return {
+    type: "SET_LOADING",
     payload: boolean
   };
 };

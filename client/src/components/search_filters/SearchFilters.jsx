@@ -7,18 +7,18 @@ import {
   setSearch, 
   setSortType, 
   setUserCreatedFilter, 
-  setSearchInput 
+  setLoading
 } from '../../actions';
 import { getSortCb } from '../../helpers/getSortCb';
 
 const SearchFilters = () => {
   const [temperaments, setTemperaments] = useState([]);
+  const [searchInput, setSearchInput] = useState("");
 
   const stateTemperaments = useSelector(state => state.temperaments);
   const stateFilter = useSelector(state => state.filters.filter);
   const stateUserCreatedFilter = useSelector(state => state.filters.userCreatedFilter);
   const stateSortType = useSelector(state => state.filters.sortType);
-  const stateSearchInput = useSelector(state => state.filters.searchInput)
   
   const dispatch = useDispatch();
 
@@ -28,14 +28,15 @@ const SearchFilters = () => {
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(stateSearchInput !== "") {
+    if(searchInput !== "") {
+      dispatch(setLoading(true))
       dispatch(setPage(1));
-      dispatch(setSearch(stateSearchInput));
+      dispatch(setSearch(searchInput));
     }
   }
   
   const handleChange = (e) => {
-    dispatch(setSearchInput(e.target.value));
+    setSearchInput(e.target.value);
   }
   
   const handleSortChange = (e) => {
@@ -43,7 +44,7 @@ const SearchFilters = () => {
   }
   
   const handleFilter = (e) => {
-    dispatch(setPage(1));;
+    dispatch(setPage(1));
     dispatch(setFilter(e.target.value));
   }
   
@@ -54,19 +55,26 @@ const SearchFilters = () => {
   
   return (
     <div className="form-container">
-      <form className="search-div" onSubmit={handleSubmit}>
+      <form data-testid="filters-form" className="search-div" onSubmit={handleSubmit}>
         <input 
           name="breed"
           type="text"
-          value={stateSearchInput} 
+          value={searchInput} 
           onChange={handleChange} 
           placeholder="Search by breed"
           className="search-input"
+          data-testid="filters-query"
         />
-        <input className="search-submit" type="submit" value=">"/>
+        <input className="search-submit" type="submit" value=">" data-testid="filters-submit"/>
       </form>
       <label htmlFor="sort">Sort:</label>
-      <select name="sort" value={stateSortType} onChange={handleSortChange} className="select-sort">
+      <select 
+        name="sort" 
+        value={stateSortType} 
+        onChange={handleSortChange} 
+        className="select-sort"
+        data-testid="filters-sort"
+      >
         <option value="default" hidden={true}>Sort ⇅</option>
         <optgroup label="Alphabetically">
           <option value="AA">A {"<"} Z</option>
@@ -78,7 +86,13 @@ const SearchFilters = () => {
         </optgroup>
       </select>
       <label htmlFor="filter">Filter:</label>
-      <select name="filter" value={stateFilter} onChange={handleFilter} className="select-temps">
+      <select 
+        name="filter" 
+        value={stateFilter} 
+        onChange={handleFilter} 
+        className="select-temps"
+        data-testid="filters-filter"
+      >
         <option name="placeholder" hidden="hidden" value="">Filter 🜄</option>
         <option value="">None</option>
         <optgroup label="Temperament">
@@ -101,6 +115,7 @@ const SearchFilters = () => {
           name="checkbox"
           checked={stateUserCreatedFilter} 
           onChange={handleCheckbox}
+          data-testid="filters-checkbox"
           />
         <label htmlFor="checkbox" className="check-label"> Made by user</label>
       </div>
