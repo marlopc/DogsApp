@@ -1,11 +1,12 @@
 import './Footer.css';
 import { NavLink } from 'react-router-dom';
+import dogsAppLogo from '../../assets/dogs-app-color.png';
 
 const Footer = () => {
   return (
     <div className="footer-container">
       <div className="img-n-nav-container">
-        <img src="../../img/dogs-app-color.png" alt="" className="logo-footer"/>
+        <img src={dogsAppLogo} alt="" className="logo-footer"/>
         <div className="vertical-div-footer" />
         <div className="navigation-footer">
           <h5>Navigation</h5>

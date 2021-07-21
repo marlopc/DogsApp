@@ -1,9 +1,10 @@
 import './Loader.css';
+import LoaderLogo from '../../assets/responsive-logo.png'
 
 const Loader = () => {
   return (
     <div className="loader-container">
-      <img src="../../img/responsive-logo.png" alt="loader" className="loader"/>
+      <img src={LoaderLogo} alt="loader" className="loader"/>
     </div>
   )
 }

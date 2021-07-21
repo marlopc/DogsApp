@@ -11,6 +11,7 @@ const initialState = {
     sortType: "AA",
     filter: "",
     search: "",
+    searchInput: "",
     userCreatedFilter: false
   }
 }
@@ -41,7 +42,7 @@ const reducer = (state = initialState, { type, payload }) => {
         loading: payload
       }
  
-    case 'SET_DEFAULT_STATE':
+    case 'SET_DEFAULT_HOME':
       return {
         ...state,
         pagination: payload.pagination,
@@ -72,6 +73,15 @@ const reducer = (state = initialState, { type, payload }) => {
         filters: {
           ...state.filters,
           search: payload
+        }
+      }
+
+    case 'SET_SEARCH_INPUT':
+      return {
+        ...state,
+        filters: {
+          ...state.filters,
+          searchInput: payload
         }
       }
 

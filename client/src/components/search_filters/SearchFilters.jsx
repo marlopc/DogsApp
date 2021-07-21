@@ -1,42 +1,40 @@
 import './SearchFilters.css';
-import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { getSortCb } from '../../helpers/getSortCb';
 import { 
   setFilter,
   setPage, 
   setSearch, 
   setSortType, 
   setUserCreatedFilter, 
-  setLoading
+  setLoading,
+  setDefaultHome,
+  setSearchInput
 } from '../../actions';
-import { getSortCb } from '../../helpers/getSortCb';
 
 const SearchFilters = () => {
-  const [temperaments, setTemperaments] = useState([]);
-  const [searchInput, setSearchInput] = useState("");
-
   const stateTemperaments = useSelector(state => state.temperaments);
   const stateFilter = useSelector(state => state.filters.filter);
   const stateUserCreatedFilter = useSelector(state => state.filters.userCreatedFilter);
   const stateSortType = useSelector(state => state.filters.sortType);
+  const stateSearchInput = useSelector(state => state.filters.searchInput);
   
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setTemperaments(stateTemperaments);
-  }, [stateTemperaments])
   
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(searchInput !== "") {
+    if(stateSearchInput !== "") {
       dispatch(setLoading(true))
       dispatch(setPage(1));
-      dispatch(setSearch(searchInput));
+      dispatch(setSearch(stateSearchInput));
+    } else {
+      dispatch(setLoading(true))
+      dispatch(setDefaultHome())
     }
   }
   
   const handleChange = (e) => {
-    setSearchInput(e.target.value);
+    dispatch(setSearchInput(e.target.value));
   }
   
   const handleSortChange = (e) => {
@@ -59,7 +57,7 @@ const SearchFilters = () => {
         <input 
           name="breed"
           type="text"
-          value={searchInput} 
+          value={stateSearchInput} 
           onChange={handleChange} 
           placeholder="Search by breed"
           className="search-input"
@@ -77,12 +75,12 @@ const SearchFilters = () => {
       >
         <option value="default" hidden={true}>Sort ⇅</option>
         <optgroup label="Alphabetically">
-          <option value="AA">A {"<"} Z</option>
-          <option value="AD">Z {"<"} A</option>
+          <option value="AA">A {"→"} Z</option>
+          <option value="AD">Z {"→"} A</option>
         </optgroup>
         <optgroup label="Weight">
-          <option value="WA">Less weight {"<"} More weight</option>
-          <option value="WD">More weight {"<"} Less weight</option>
+          <option value="WA">Less weight {"→"} More weight</option>
+          <option value="WD">More weight {"→"} Less weight</option>
         </optgroup>
       </select>
       <label htmlFor="filter">Filter:</label>
@@ -97,7 +95,7 @@ const SearchFilters = () => {
         <option value="">None</option>
         <optgroup label="Temperament">
         {
-          [...temperaments]
+          [...stateTemperaments]
             .sort(getSortCb("AA"))
             .map(temperament => (
               <option 

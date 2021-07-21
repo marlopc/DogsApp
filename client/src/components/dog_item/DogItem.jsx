@@ -7,7 +7,7 @@ const DogItem = ({ name, image_url, temperament, id }) => {
   const addDefaultSrc = (e) => {
     attempt++
     if(attempt < 2) {
-      e.target.src = `${image_url.slice(0, -4)}.png`
+      e.target.src = image_url && `${image_url.slice(0, -4)}.png`
     }
   } 
 
@@ -17,7 +17,7 @@ const DogItem = ({ name, image_url, temperament, id }) => {
         src={`${image_url}`} 
         onError={addDefaultSrc}
         alt={`${name}`}
-      />
+        />
       <div className="dog-info">
         <h2>{name}</h2>
         <small>{temperament}</small>

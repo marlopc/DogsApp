@@ -2,7 +2,9 @@ import './NavBar.css';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { setDefault, getDogs, setLoading } from '../../actions';
+import { setDefaultHome, getDogs, setLoading } from '../../actions';
+import dogsAppLogo from '../../assets/dogs-app-color.png';
+import dogsAppLogoResponsive from '../../assets/responsive-logo.png';
 
 const NavBar = () => {
 
@@ -16,7 +18,7 @@ const NavBar = () => {
 
   const handleGoHome = () => {
     dispatch(setLoading(true));
-    dispatch(setDefault());
+    dispatch(setDefaultHome());
     dispatch(getDogs());
   }
 
@@ -24,13 +26,13 @@ const NavBar = () => {
     <nav className="nav-container">
       <Link to="/home" onClick={handleGoHome} onMouseOver={toggleGoHomeHidden} onMouseOut={toggleGoHomeHidden} className="link">
         <div className="logo-to-home">
-          <img src="../../img/dogs-app-color.png" alt="dogs-app-logo" className="logo"/>
+          <img src={dogsAppLogo} alt="dogs-app-logo" className="logo"/>
           <small className={goHomeHidden ? "go-home-hidden" : "go-home"}>To home {">"}</small>
         </div>
       </Link>
       <div className="links-container">
         <Link to="/home" onClick={handleGoHome}>
-          <img src="../../img/responsive-logo.png" alt="dogs-app-rlogo" className="small-logo"/>
+          <img src={dogsAppLogoResponsive} alt="dogs-app-rlogo" className="small-logo"/>
         </Link>
         <Link to="/create-dog" className="create-dog link">
           Create

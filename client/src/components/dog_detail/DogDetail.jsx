@@ -43,7 +43,7 @@ const DogDetail = ({ id }) => {
   const addDefaultSrc = (e) => {
     attempt++
     if(attempt < 2) {
-      e.target.src = `${dogDetail.image.url.slice(0, -4)}.png`
+      e.target.src = dogDetail.image.url && `${dogDetail.image.url.slice(0, -4)}.png`
     }
   } 
 

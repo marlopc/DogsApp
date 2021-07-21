@@ -1,21 +1,22 @@
 import { useDispatch } from 'react-redux';
-import { getDogs, setDefault } from '../../actions';
+import { getDogs, setDefaultHome } from '../../actions';
 import './NotFoundError.css';
+import dogHelp from '../../assets/nf-help.png';
 
 const NotFoundError = ({ setLoading }) => {
 
   const dispatch = useDispatch();
 
   const handleReset = () => {
-    dispatch(setDefault());
+    dispatch(setDefaultHome());
     dispatch(getDogs());
     setLoading(true)
-  }
+  };
 
   return (
     <div className="nf-container">
       <div>
-        <img src="../../img/nf-help.png" alt="" width="200px"/>
+        <img src={dogHelp} alt="" width="200px"/>
       </div>
       <div className="help-text">
         <h1>No results were found</h1>

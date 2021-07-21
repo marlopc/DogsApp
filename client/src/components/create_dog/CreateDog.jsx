@@ -273,6 +273,7 @@ const CreateDog = () => {
               onChange={handleChange} 
               onBlur={handleBlur} 
               value={form.name} 
+              data-testid="create-name"
               required
             />
             {errors.name && <p>{errors.name}</p>}
@@ -284,6 +285,7 @@ const CreateDog = () => {
                 value="metric" 
                 checked={form.metric} 
                 onChange={handleRadioChange}
+                data-testid="create-radio-metric"
               />
               cm / kg 
             </label>
@@ -293,6 +295,7 @@ const CreateDog = () => {
                 value="imperial" 
                 checked={form.imperial} 
                 onChange={handleRadioChange}
+                data-testid="create-radio-imperial"
               />
               inch / pound 
             </label>
@@ -306,6 +309,7 @@ const CreateDog = () => {
               onBlur={handleBlur} 
               onChange={handleChange} 
               value={form.weight_min} 
+              data-testid="create-min-w"
               required
             />
             <small>-</small> 
@@ -315,7 +319,8 @@ const CreateDog = () => {
               name="weight_max" 
               onBlur={handleBlur} 
               onChange={handleChange} 
-              value={form.weight_max} 
+              value={form.weight_max}
+              data-testid="create-max-w"
               required
             />
             {
@@ -336,6 +341,7 @@ const CreateDog = () => {
               onBlur={handleBlur} 
               onChange={handleChange} 
               value={form.height_min} 
+              data-testid="create-min-h"
               required
             />
             <small>-</small>            
@@ -346,6 +352,7 @@ const CreateDog = () => {
               onBlur={handleBlur} 
               onChange={handleChange}
               value={form.height_max} 
+              data-testid="create-max-h"
               required
             />
             {
@@ -366,6 +373,7 @@ const CreateDog = () => {
               onBlur={handleBlur} 
               onChange={handleChange} 
               value={form.life_span}
+              data-testid="create-life-span"
             />
             {
               errors.life_span && 
@@ -374,7 +382,10 @@ const CreateDog = () => {
           </div>
           <div className="input-form input-temperament">
             <label>Temperament</label>
-            <select name="temperament" value={temperamentSelect} onChange={handleTemperament}>
+            <select name="temperament" 
+              value={temperamentSelect} 
+              onChange={handleTemperament}
+            >
             <option value="Select" hidden={true}>Select</option>
               {
                 [...stateTemperaments]
@@ -398,14 +409,29 @@ const CreateDog = () => {
           </div>
           <div className="input-form input-imageurl">
             <label>Image url </label>
-            <input type="text" placeholder="Set a image..." name="image_url" onBlur={handleBlur} onChange={handleImageChange} value={form.image_url}></input>
+            <input 
+              type="text" 
+              placeholder="Set a image..." 
+              name="image_url" 
+              onBlur={handleBlur} 
+              onChange={handleImageChange} 
+              value={form.image_url}
+              data-testid="create-image-url"
+            />
             {
               errors.image_url && 
               <p>{errors.image_url}</p>
             }
           </div>
           <div className="input-description">
-            <textarea placeholder="Write a description..." name="description" onBlur={handleBlur} onChange={handleChange} value={form.description}/>
+            <textarea 
+              placeholder="Write a description..." 
+              name="description" 
+              onBlur={handleBlur} 
+              onChange={handleChange} 
+              value={form.description}
+              data-testid="create-description"
+            />
             {
               errors.description && 
               <p>{errors.description}</p>

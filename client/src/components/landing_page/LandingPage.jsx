@@ -1,12 +1,14 @@
 import { Link } from 'react-router-dom';
 import './LandingPage.css'
+import landingFront from '../../assets/front-view.png';
+import landingFrontResponsive from '../../assets/front-view-responsive.png';
 
 const LandingPage = () => {
   return (
     <div className="background-image">
       <div className="container-card">
-          <img src="../../img/front-view.png" alt="laptop_dog" className="dog"></img>
-          <img src="../../img/front-view-responsive.png" alt="laptop_dog" className="dog dog-responsive"></img>
+          <img src={landingFront} alt="laptop_dog" className="dog"></img>
+          <img src={landingFrontResponsive} alt="laptop_dog" className="dog dog-responsive"></img>
         <div className="vertical-line"></div>
         <div className="link-div">
           <Link to="/home/page=1" className="link">

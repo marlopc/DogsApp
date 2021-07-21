@@ -6,7 +6,7 @@ export function getTemperaments() {
       .then(temperaments => {
         dispatch({type: "GET_TEMPERAMENTS", payload: temperaments.data});
       })
-      .catch(error => console.error(error));
+      .catch(() => {});
   };
 };
 
@@ -20,7 +20,7 @@ export function getDogs(name) {
       .then(dogs => {
         dispatch({type: "GET_DOGS", payload: dogs.data});
       })
-      .catch(error => console.error(error));
+      .catch(() => {});
   };
 };
 
@@ -30,13 +30,13 @@ export function getDogDetail(id) {
       .then(dog => {
         dispatch({type: "GET_DOG_DETAIL", payload: dog.data});
       })
-      .catch(error => console.error(error));
+      .catch(() => {});
   };
 };
 
-export function setDefault() {
+export function setDefaultHome() {
   return {
-    type: "SET_DEFAULT_STATE",
+    type: "SET_DEFAULT_HOME",
     payload: {
       pagination: {
         pages: 0, 
@@ -85,6 +85,13 @@ export function setSearch(param) {
   return {
     type: "SET_SEARCH",
     payload: param
+  };
+};
+
+export function setSearchInput(input) {
+  return {
+    type: "SET_SEARCH_INPUT",
+    payload: input
   };
 };
 
