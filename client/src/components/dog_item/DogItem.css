@@ -8,6 +8,7 @@
   justify-content: space-evenly;
   margin: 2vh;
   background-color: #bc8a5f;
+  border-radius: 3px;
 }
 
 .item-container:hover {

@@ -10,6 +10,7 @@
   font-family: "Cabin", sans-serif;
   border: 1px solid #603808;
   min-height: 203px;
+  border-radius: 3px;
 }
 
 .form-container {
