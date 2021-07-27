@@ -38,7 +38,26 @@ const sorts = {
       return 1;
     }
     return 0
+  },
+  LSA (a, b) {
+    if(parseInt(a.life_span) > parseInt(b.life_span)) {
+      return 1
+    }
+    if(parseInt(b.life_span) > parseInt(a.life_span)) {
+      return -1;
+    }
+    return 0
+  },
+  LSD (a, b) {
+    if(parseInt(a.life_span) > parseInt(b.life_span)) {
+      return -1
+    }
+    if(parseInt(b.life_span) > parseInt(a.life_span)) {
+      return 1;
+    }
+    return 0
   }
+
 }
 
 export const getSortCb = (sorting) => {

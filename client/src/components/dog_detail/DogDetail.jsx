@@ -7,6 +7,7 @@ import Footer from "../footer/Footer";
 import "./DogDetail.css";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+const DB_HOST = process.env.REACT_APP_DB_HOST;
 
 const DogDetail = ({ id }) => {
   const dispatch = useDispatch();
@@ -32,7 +33,7 @@ const DogDetail = ({ id }) => {
         Accept: "application/json",
       };
       axios
-        .delete("http://localhost:3001/dog", { data: body, headers })
+        .delete(`http://${DB_HOST}/dog`, { data: body, headers })
         .then(() => {
           alert("Dog successfully removed");
           history.push("/home");
@@ -61,12 +62,14 @@ const DogDetail = ({ id }) => {
               <div className="image-n-name">
                 <div className="picture">
                   {dogDetail.image && (
-                    <img
-                      src={`${dogDetail.image.url}`}
-                      onError={addDefaultSrc}
-                      alt={dogDetail.image_id}
-                      width="300px"
-                    />
+                    <a href={dogDetail.image.url}>
+                      <img
+                        src={dogDetail.image.url}
+                        onError={addDefaultSrc}
+                        alt={dogDetail.image_id}
+                        width="300px"
+                      />
+                    </a>
                   )}
                 </div>
                 <div className="info">

@@ -64,7 +64,8 @@ const apiDataHandler = apiResponse => {
         weight: breed.weight.imperial.split(" - ")[0],
         image_url: breed.hasOwnProperty("image") 
         ? breed.image.url 
-        : `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`
+        : `https://cdn2.thedogapi.com/images/${breed.reference_image_id}.jpg`,
+        life_span: breed.life_span.split(" ")[0]
       })
     }
     return acc; 
@@ -79,7 +80,8 @@ const dbDataHandler = dbResponse => {
         name: dog.name,
         temperament: dog.temperaments.map(temperament => temperament.name).join(", "),
         image_url: dog.image_url,
-        weight: dog.weight.split("-")[0]
+        weight: dog.weight.split("-")[0],
+        life_span: dog.life_span.split(" ")[0]
       };
     });
     return dbResponse;

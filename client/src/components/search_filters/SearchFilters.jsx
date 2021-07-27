@@ -92,8 +92,12 @@ const SearchFilters = () => {
           <option value="AD">Z {"→"} A</option>
         </optgroup>
         <optgroup label="Weight">
-          <option value="WA">Less weight {"→"} More weight</option>
-          <option value="WD">More weight {"→"} Less weight</option>
+          <option value="WA">Less {"→"} More</option>
+          <option value="WD">More {"→"} Less</option>
+        </optgroup>
+        <optgroup label="Life span">
+          <option value="LSA">Less {"→"} More</option>
+          <option value="LSD">More {"→"} Less</option>
         </optgroup>
       </select>
       <label htmlFor="filter">Filter:</label>
@@ -104,7 +108,9 @@ const SearchFilters = () => {
         className="select-temps"
         data-testid="filters-filter"
       >
-        <option name="placeholder" hidden="hidden" value="">Filter 🜄</option>
+        <option name="placeholder" hidden="hidden" value="">
+          Filter Ⴤ
+        </option>
         <option value="">None</option>
         <optgroup label="Temperament">
           {[...stateTemperaments].sort(getSortCb("AA")).map((temperament) => (
@@ -122,7 +128,10 @@ const SearchFilters = () => {
           onChange={handleCheckbox}
           data-testid="filters-checkbox"
         />
-        <label htmlFor="checkbox" className="check-label"> Made by user</label>
+        <label htmlFor="checkbox" className="check-label">
+          {" "}
+          Made by user
+        </label>
       </div>
     </div>
   );

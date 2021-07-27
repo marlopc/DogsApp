@@ -34,7 +34,7 @@
 }
 
 .li-temperament {
-  margin-left: 2px;
+  margin: 2px 0 2px 2px;
   color: #6f4518;
   background-color: #d4a276;
   border: 1px solid #6f4518;
@@ -171,12 +171,16 @@
   max-height: 434px;
 }
 
+.error-temperament {
+  color: #ef3340;
+}
+
 .more {
   padding: 10px 0 0 10px;
   font-size: 25px;
 }
 
-@media screen and (max-width: 1100px) {
+@media screen and (max-width: 1040px) {
   .form-dog,
   .preview-temp-container {
     width: 100%;
@@ -210,6 +214,10 @@
   .error-temperament {
     width: 85%;
     text-align: center;
-    color: #ef3340;
+  }
+
+  .temp {
+    height: max-content;
+    min-height: 0;
   }
 }

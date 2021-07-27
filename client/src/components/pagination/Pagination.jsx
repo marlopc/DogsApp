@@ -23,9 +23,7 @@ const Pagination = () => {
       {statePages !== 0 && (
         <>
           <div
-            className={`${
-              statePage === 1 ? "disabled-link" : "link"
-            } button-container`}
+            className={`${statePage === 1 ? "disabled-link" : "link"} button-container`}
             onClick={handleBack}
           >
             <div className="nav-buttons">{"<"}</div>

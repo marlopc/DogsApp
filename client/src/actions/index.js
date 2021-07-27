@@ -1,8 +1,9 @@
 const axios = require('axios');
+const DB_HOST = process.env.REACT_APP_DB_HOST;
 
 export function getTemperaments() {
   return function(dispatch) {
-    return axios.get('http://localhost:3001/temperament')
+    return axios.get(`http://${DB_HOST}/temperament`)
       .then(temperaments => {
         dispatch({type: "GET_TEMPERAMENTS", payload: temperaments.data});
       })
@@ -12,9 +13,9 @@ export function getTemperaments() {
 
 export function getDogs(name) {
   return function(dispatch) {
-    let url = `http://localhost:3001/dogs`;
+    let url = `http://${DB_HOST}/dogs`;
     if(name) {
-      url = `http://localhost:3001/dogs?name=${name}`
+      url = `http://${DB_HOST}/dogs?name=${name}`
     }
     return axios.get(url)
       .then(dogs => {
@@ -26,7 +27,7 @@ export function getDogs(name) {
 
 export function getDogDetail(id) {
   return function(dispatch) {
-    return axios.get(`http://localhost:3001/dogs/${id}`)
+    return axios.get(`http://${DB_HOST}/dogs/${id}`)
       .then(dog => {
         dispatch({type: "GET_DOG_DETAIL", payload: dog.data});
       })

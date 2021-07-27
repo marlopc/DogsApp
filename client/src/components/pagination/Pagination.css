@@ -2,7 +2,7 @@
   display: flex;
   padding: 30px 0 10px;
   justify-content: center;
-  background-color: #ffedd8;
+  background-color: transparent;
   height: 46px;
 }
 
@@ -39,6 +39,11 @@
 
 .nav-buttons::selection {
   color: #603808;
+  background-color: transparent;
+}
+
+.button-container::selection,
+.button-container:active {
   background-color: transparent;
 }
 
@@ -92,5 +97,11 @@
 
   .pagination-ctrl-container strong {
     display: none;
+  }
+}
+
+@media screen and (max-height: 530px) {
+  .pagination-ctrl-container {
+    margin-top: 18vh;
   }
 }
