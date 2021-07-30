@@ -4,15 +4,15 @@ const fs = require('fs');
 const path = require('path');
 const { DB_USER, DB_PASSWORD, DB_HOST, DATABASE_URL, NODE_ENV } = process.env;
 
-const DATABASE = NODE_ENV === "DEVELOPMENT"
-  ? `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`
-  : DATABASE_URL;
 const options = {
   logging: false, // set to console.log to see the raw SQL queries
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 };
-
 if (NODE_ENV !== "DEVELOPMENT") options.dialectOptions = { ssl: { rejectUnauthorized: false } };
+
+const DATABASE = NODE_ENV === "DEVELOPMENT"
+  ? `postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/dogs`
+  : DATABASE_URL;
 
 const sequelize = new Sequelize(DATABASE, options);
 const basename = path.basename(__filename);

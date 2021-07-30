@@ -16,6 +16,7 @@ const DogDetail = ({ id }) => {
   const dogDetail = useSelector((state) => state.dogDetail);
 
   useEffect(() => {
+    document.title = "Dog details - Dogs App"
     window.scrollTo(0, 0);
   }, []);
 

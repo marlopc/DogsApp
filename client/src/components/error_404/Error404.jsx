@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Error404.css";
 import { Link } from "react-router-dom";
 
-const error404 = () => {
+const Error404 = () => {
+
+  useEffect(() => {
+    document.title = "Error - Dogs App";
+  }, []);
+
   return (
     <div className="error-container">
       <h1 className="error-description">Error 404: not found</h1>
@@ -11,4 +16,4 @@ const error404 = () => {
   )
 };
 
-export default error404;
+export default Error404;

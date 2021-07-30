@@ -23,23 +23,27 @@ const Pagination = () => {
     <div className="pagination-ctrl-container">
       {statePages !== 0 && (
         <>
-          <div
-            className={`${statePage === 1 ? "disabled-link" : "link"} button-container`}
-            onClick={handleBack}
-          >
-            <div className="nav-buttons">{"<"}</div>
-          </div>
-          <div className={`${statePage === 1 ? "btn-placeholder" : ""}`}></div>
+          {statePage !== 1 ? (
+            <button
+              className="nav-buttons link button-container"
+              onClick={handleBack}
+            >
+              {"<"}
+            </button>
+          ) : (
+            <div className="btn-placeholder" />
+          )}
           {statePages !== 1 && <strong>{statePage}</strong>}
-          <div
-            className={`${statePage >= statePages ? "disabled-link" : "link"} button-container`}
-            onClick={handleNext}
-          >
-            <div className="nav-buttons">{">"}</div>
-          </div>
-          <div
-            className={`${statePage >= statePages ? "btn-placeholder" : ""}`}
-          ></div>
+          {statePage >= statePages ? (
+            <div className="btn-placeholder" />
+          ) : (
+            <button
+              className="nav-buttons link button-container"
+              onClick={handleNext}
+            >
+              {">"}
+            </button>
+          )}
         </>
       )}
     </div>

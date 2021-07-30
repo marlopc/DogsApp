@@ -1,30 +1,40 @@
+.about-page {
+  font-family: "Quite Magical", sans-serif;
+  color: #603808;
+}
+
+.about-page h1,
+.about-container h3 {
+  text-align: center;
+}
+
 .about-container {
-  width: 100%;
+  margin: 0 auto;
+  width: 60%;
   height: 100%;
   min-height: 70vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  font-family: "Quite Magical", sans-serif;
-  color: #603808;
 }
 
 .about-container h3 {
   font-size: 15px;
   font-family: "Cabin", sans-serif;
+  margin-left: 3%;
+  width: 100%;
 }
 
 .about-container p {
-  width: 75vw;
+  margin-left: 3%;
+  width: 100%;
   font-family: "Cabin", sans-serif;
-  text-align: center;
 }
 
 .socials-wrapper {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  width: 40vw;
+  width: 50%;
   margin: 2vh 0;
 }
 
@@ -44,6 +54,10 @@
   font-size: 17px; 
   font-family: "Cabin", sans-serif;
   list-style: "› ";
+}
+
+.tech-ul li {
+  margin-left: 1.5%;
 }
 
 @media screen and (max-width: 900px) {

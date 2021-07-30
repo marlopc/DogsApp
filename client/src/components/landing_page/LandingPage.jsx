@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./LandingPage.css";
 import landingFront from "../../assets/front-view.png";
 import landingFrontResponsive from "../../assets/front-view-responsive.png";
 import { Link } from "react-router-dom";
 
 const LandingPage = () => {
+
+  useEffect(() => {
+    document.title = "Dogs App";
+  });
+
   return (
     <div className="background-image">
       <div className="container-card">

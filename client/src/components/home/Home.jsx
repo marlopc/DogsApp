@@ -27,6 +27,10 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    document.title = "Home - Dogs App";
+  });
+
+  useEffect(() => {
     dispatch(setDefaultHome());
     dispatch(getTemperaments());
     dispatch(getDogs());

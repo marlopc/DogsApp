@@ -30,6 +30,10 @@ const CreateDog = () => {
   const [temperamentSelect, setTemperamentSelect] = useState("Select");
   const [imageUrlPreview, setImageUrlPreview] = useState(null);
 
+  useEffect(() => {
+    document.title = "Create - Dogs App";
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (Object.keys(errors).length === 0) {
