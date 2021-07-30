@@ -1,7 +1,7 @@
 const { Dog, Temperament } = require('../db.js');
 const { BASE_URL, API_KEY } = require('../../constants');
 const axios = require('axios');
-const { Op, AccessDeniedError } = require('sequelize');
+const { Op } = require('sequelize');
 
 const getDogs = (req, res, next) => {
   const { name } = req.query;

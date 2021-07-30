@@ -1,5 +1,4 @@
 const { Dog, conn } = require('../../src/db.js');
-const { expect } = require('chai');
 const { v4: uuidv4 } = require('uuid');
 
 describe('Dog model', () => {

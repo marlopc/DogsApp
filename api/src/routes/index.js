@@ -10,4 +10,8 @@ router.use('/dog', dogRouter);
 router.use('/dogs', dogsRouter);
 router.use('/temperament', temperamentRouter);
 
+router.get('/', (req, res) => {
+  res.send("/");
+})
+
 module.exports = router;
