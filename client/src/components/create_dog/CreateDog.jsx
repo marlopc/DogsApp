@@ -58,7 +58,7 @@ const CreateDog = () => {
         Accept: "application/json",
       };
       axios
-        .post(`http://${DB_HOST}/dog`, body, { headers })
+        .post(`${DB_HOST}/dog`, body, { headers })
         .then(() => {
           setForm(initialForm);
           setImageUrlPreview(null);

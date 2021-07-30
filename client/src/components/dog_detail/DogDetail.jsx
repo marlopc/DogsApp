@@ -34,7 +34,7 @@ const DogDetail = ({ id }) => {
         Accept: "application/json",
       };
       axios
-        .delete(`http://${DB_HOST}/dog`, { data: body, headers })
+        .delete(`${DB_HOST}/dog`, { data: body, headers })
         .then(() => {
           alert("Dog successfully removed");
           history.push("/home");
