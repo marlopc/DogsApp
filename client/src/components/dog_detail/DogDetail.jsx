@@ -28,7 +28,7 @@ const DogDetail = ({ id }) => {
       "Are you sure you want to permanently remove this dog?"
     );
     if (doubleCheck) {
-      const body = { id };
+      const body = {id};
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
