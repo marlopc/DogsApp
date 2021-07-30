@@ -1,3 +1,4 @@
+import React from "react";
 import "./Footer.css";
 import { NavLink } from "react-router-dom";
 import dogsAppLogo from "../../assets/dogs-app-color.png";

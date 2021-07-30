@@ -9,6 +9,11 @@
   color: #603808;
 }
 
+.about-container h3 {
+  font-size: 15px;
+  font-family: "Cabin", sans-serif;
+}
+
 .about-container p {
   width: 75vw;
   font-family: "Cabin", sans-serif;
@@ -28,10 +33,17 @@
   align-items: flex-end;
 }
 
-.social-item small {
+.text-link {
   width: max-content;
   font-size: 20px;
   padding-bottom: 5%;
+}
+
+.tech-ul {
+  padding: 0;
+  font-size: 17px; 
+  font-family: "Cabin", sans-serif;
+  list-style: "› ";
 }
 
 @media screen and (max-width: 900px) {

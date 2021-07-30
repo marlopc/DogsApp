@@ -1,6 +1,7 @@
+import React from "react";
+import "./Pagination.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setPage } from "../../actions";
-import "./Pagination.css";
 
 const Pagination = () => {
   const statePages = useSelector((state) => state.pagination.pages);

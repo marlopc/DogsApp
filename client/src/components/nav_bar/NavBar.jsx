@@ -1,10 +1,10 @@
+import React, { useState } from "react";
 import "./NavBar.css";
-import { Link } from "react-router-dom";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { setDefaultHome, getDogs, setLoading } from "../../actions";
 import dogsAppLogo from "../../assets/dogs-app-color.png";
 import dogsAppLogoResponsive from "../../assets/responsive-logo.png";
+import { useDispatch } from "react-redux";
+import { setDefaultHome, getDogs, setLoading } from "../../actions";
+import { Link } from "react-router-dom";
 
 const NavBar = () => {
   const [goHomeHidden, setGoHomeHidden] = useState(true);

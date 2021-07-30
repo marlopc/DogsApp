@@ -1,10 +1,10 @@
+import React, { useState, useEffect } from "react";
 import "./CreateDog.css";
+import axios from "axios";
 import NavBar from "../nav_bar/NavBar";
 import Footer from "../footer/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
 import { getTemperaments } from "../../actions";
-import axios from "axios";
 import { converter } from "../../helpers/converter";
 import { validate } from "../../helpers/formValidate";
 

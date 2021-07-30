@@ -1,7 +1,8 @@
-import { useDispatch } from "react-redux";
-import { getDogs, setDefaultHome } from "../../actions";
+import React from "react";
 import "./NotFoundError.css";
 import dogHelp from "../../assets/nf-help.png";
+import { useDispatch } from "react-redux";
+import { getDogs, setDefaultHome } from "../../actions";
 
 const NotFoundError = ({ setLoading }) => {
   const dispatch = useDispatch();
@@ -25,11 +26,11 @@ const NotFoundError = ({ setLoading }) => {
           <li>Search it manually</li>
         </ul>
         <small>
-          Click{" "}
-          <strong style={{ cursor: "pointer" }} onClick={handleReset}>
-            {" "}
-            here
-          </strong>{" "}
+          Click
+          <strong 
+            style={{ cursor: "pointer" }} 
+            onClick={handleReset}
+          > here </strong>
           to get back
         </small>
       </div>

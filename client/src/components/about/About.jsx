@@ -1,6 +1,7 @@
+import React from "react";
+import "./About.css";
 import NavBar from "../nav_bar/NavBar";
 import Footer from "../footer/Footer";
-import "./About.css";
 import gitHubIcon from "../../assets/github_icon.png";
 import linkedInIcon from "../../assets/linkedIn_icon.png";
 
@@ -15,7 +16,7 @@ const About = () => {
           for Henry's bootcamp, I hope you like it!
         </p>
         <h2>TECNOLOGIES</h2>
-        <ul style={{padding: "0", fontSize: "22px"}}>
+        <ul className="tech-ul">
           <li>React-Redux</li>
           <li>Node.JS</li>
           <li>Express</li>
@@ -23,7 +24,7 @@ const About = () => {
           <li>PostgreSQL</li>
         </ul>
         <p>
-          you can use the following links if you want to contact me or see more.
+          you can use the following links if you want to contact me or see more:
         </p>
         <div className="socials-wrapper">
           <div className="social-item">
@@ -34,7 +35,14 @@ const About = () => {
             >
               <img src={linkedInIcon} alt="linkedIn-icon" width="100px" />
             </a>
-            <small>/in/lucas-panaro/</small>
+            <a
+              href="https://www.linkedin.com/in/lucas-panaro/"
+              target="_black"
+              rel="noreferrer"
+              className="link text-link"
+            >
+              <small className="text-link">/in/lucas-panaro/</small>
+            </a>
           </div>
           <div className="social-item">
             <a
@@ -44,9 +52,17 @@ const About = () => {
             >
               <img src={gitHubIcon} alt="github-icon" width="100px" />
             </a>
-            <small>/marlopc</small>
+            <a
+              href="https://www.linkedin.com/in/lucas-panaro/"
+              target="_black"
+              rel="noreferrer"
+              className="link text-link"
+            >
+              <small className="text-link">/marlopc</small>
+            </a>
           </div>
         </div>
+        <h3>Thanks, see you!</h3>
       </div>
       <Footer />
     </div>

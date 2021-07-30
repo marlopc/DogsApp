@@ -1,3 +1,4 @@
+import React from "react";
 import "./Loader.css";
 import LoaderLogo from "../../assets/responsive-logo.png";
 

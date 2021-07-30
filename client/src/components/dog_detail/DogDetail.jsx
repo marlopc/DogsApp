@@ -1,12 +1,13 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getDogDetail } from "../../actions";
-import Loader from "../loader/Loader";
-import NavBar from "../nav_bar/NavBar";
-import Footer from "../footer/Footer";
 import "./DogDetail.css";
 import axios from "axios";
+import Footer from "../footer/Footer";
+import Loader from "../loader/Loader";
+import NavBar from "../nav_bar/NavBar";
 import { useHistory } from "react-router-dom";
+import { getDogDetail } from "../../actions";
+
 const DB_HOST = process.env.REACT_APP_DB_HOST;
 
 const DogDetail = ({ id }) => {

@@ -1,3 +1,4 @@
+import React from "react";
 import "./SearchFilters.css";
 import { useDispatch, useSelector } from "react-redux";
 import { getSortCb } from "../../helpers/getSortCb";
@@ -114,7 +115,10 @@ const SearchFilters = () => {
         <option value="">None</option>
         <optgroup label="Temperament">
           {[...stateTemperaments].sort(getSortCb("AA")).map((temperament) => (
-            <option value={temperament.name} key={temperament.id}>
+            <option 
+              value={temperament.name} 
+              key={temperament.id}
+            >
               {temperament.name}
             </option>
           ))}

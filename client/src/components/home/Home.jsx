@@ -1,20 +1,15 @@
-import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getSortCb } from "../../helpers/getSortCb";
-import NotFoundError from "../not_found_error/NotFoundError";
-import SearchFilters from "../search_filters/SearchFilters";
-import Pagination from "../pagination/Pagination";
-import DogItem from "../dog_item/DogItem";
-import NavBar from "../nav_bar/NavBar";
-import Loader from "../loader/Loader";
-import Footer from "../footer/Footer";
+import React, { useEffect, useState } from "react";
 import "./Home.css";
-import {
-  getDogs,
-  getTemperaments,
-  setDefaultHome,
-  setPages,
-} from "../../actions";
+import { useDispatch, useSelector } from "react-redux";
+import DogItem from "../dog_item/DogItem";
+import Footer from "../footer/Footer";
+import Loader from "../loader/Loader";
+import NavBar from "../nav_bar/NavBar";
+import NotFoundError from "../not_found_error/NotFoundError";
+import Pagination from "../pagination/Pagination";
+import SearchFilters from "../search_filters/SearchFilters";
+import { getSortCb } from "../../helpers/getSortCb";
+import { getDogs, getTemperaments, setDefaultHome, setPages } from "../../actions";
 
 const Home = () => {
   const [allDogs, setAllDogs] = useState([]);
