@@ -88,7 +88,8 @@ const DogDetail = ({ id }) => {
                       Height: {dogDetail.height.metric} centimeters /{" "}
                       {dogDetail.height.imperial} inches
                     </li>
-                    <li>Life span: {dogDetail.life_span}</li>
+                    {dogDetail.life_span.trim().includes(" ") && (
+                    <li>Life span: {dogDetail.life_span}</li>)}
                     {dogDetail.bred_for && (
                       <li>Bred for: {dogDetail.bred_for}.</li>
                     )}

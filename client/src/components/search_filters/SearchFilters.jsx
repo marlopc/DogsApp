@@ -85,20 +85,18 @@ const SearchFilters = () => {
         className="select-sort"
         data-testid="filters-sort"
       >
-        <option value="default" hidden={true}>
-          Sort ⇅
-        </option>
+        <option value="default" hidden={true}>Sort ⇅</option>
         <optgroup label="Alphabetically">
           <option value="AA">A {"→"} Z</option>
           <option value="AD">Z {"→"} A</option>
         </optgroup>
         <optgroup label="Weight">
-          <option value="WA">Less {"→"} More</option>
-          <option value="WD">More {"→"} Less</option>
+          <option value="WA">Less {"→"} More / Weight</option>
+          <option value="WD">More {"→"} Less / Weight</option>
         </optgroup>
         <optgroup label="Life span">
-          <option value="LSA">Less {"→"} More</option>
-          <option value="LSD">More {"→"} Less</option>
+          <option value="LSA">Less {"→"} More / Life span</option>
+          <option value="LSD">More {"→"} Less / Life span</option>
         </optgroup>
       </select>
       <label htmlFor="filter">Filter:</label>
@@ -115,10 +113,7 @@ const SearchFilters = () => {
         <option value="">None</option>
         <optgroup label="Temperament">
           {[...stateTemperaments].sort(getSortCb("AA")).map((temperament) => (
-            <option 
-              value={temperament.name} 
-              key={temperament.id}
-            >
+            <option value={temperament.name} key={temperament.id}>
               {temperament.name}
             </option>
           ))}

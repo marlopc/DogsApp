@@ -10,6 +10,7 @@ const dog = {
   name: 'foo',
   height: '1-1-1-1',
   weight: '2-2-2-2',
+  life_span: '12 years',
   id: uuidv4()
 };
 
@@ -45,7 +46,8 @@ describe('Dogs routes', () => {
           'name', 
           'id', 
           'weight', 
-          'temperament', 
+          'temperament',
+          'life_span',
           'image_url'
         ))
     ).timeout(5000);
@@ -91,7 +93,8 @@ describe('Dog routes', () => {
       agent.post('/dog').send({
         name: "foo",
         height: "1-1-1-1",
-        weight: "2-2-2-2"
+        weight: "2-2-2-2",
+        life_span: "12 years"
       })
         .then(() => agent.get('/dogs?name=foo'))
         .then(res => expect(res.body[0]).to.have.all.keys(
@@ -99,7 +102,8 @@ describe('Dog routes', () => {
           'id', 
           'weight', 
           'temperament', 
-          'image_url'
+          'image_url',
+          'life_span'
         ))
     ).timeout(5000);
   });

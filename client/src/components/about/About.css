@@ -43,6 +43,10 @@
   align-items: flex-end;
 }
 
+.social-item:hover {
+  filter: brightness(1.2);
+} 
+
 .text-link {
   width: max-content;
   font-size: 20px;
