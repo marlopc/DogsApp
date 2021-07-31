@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import rootReducer from "../reducer";
 import thunk from "redux-thunk";
 
-const { REACT_APP_ENV } = process.env.REACT_APP_ENV;
+const { REACT_APP_ENV } = process.env;
 
 const composeEnhancers =
   typeof window === 'object' &&
@@ -19,7 +19,7 @@ const enhancer = composeEnhancers(
 let store;
 
 REACT_APP_ENV === "DEVELOPMENT" 
-  ? store = createStore(rootReducer, applyMiddleware(thunk))
-  : store = createStore(rootReducer, enhancer);
+  ? store = createStore(rootReducer, enhancer)
+  : store = createStore(rootReducer, applyMiddleware(thunk));
 
 export default store

@@ -7,7 +7,7 @@ const { NODE_ENV } = process.env;
 
 let headerOrigin = NODE_ENV === "DEVELOPMENT"
   ? "http://localhost:3000"
-  : "https://dogs-webapp.netlify.app/";
+  : "https://dogs-webapp.netlify.app";
 
 require('./db.js');
 
