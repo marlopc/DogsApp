@@ -69,10 +69,10 @@ const Home = () => {
         }
         return false;
       });
-      dispatch(setPages(Math.ceil(filtered.length / 8)));
+      dispatch(setPages(Math.ceil(filtered.length / 9)));
       setAllDogs(filtered.sort(getSortCb(stateSortType)));
     } else {
-      dispatch(setPages(Math.ceil(stateDogs.length / 8)));
+      dispatch(setPages(Math.ceil(stateDogs.length / 9)));
       setAllDogs([...stateDogs].sort(getSortCb(stateSortType)));
     }
   }, [
@@ -95,7 +95,6 @@ const Home = () => {
           <Loader />
         ) : (
           <section className="page">
-            <Pagination />
             <div className="results">
               {allDogs.length ? (
                 allDogs
@@ -108,7 +107,7 @@ const Home = () => {
                       key={dog.id}
                     />
                   ))
-                  .slice(statePage * 8 - 8, statePage * 8)
+                  .slice(statePage * 9 - 9, statePage * 9)
               ) : (
                 <NotFoundError setLoading={setLoading} />
               )}

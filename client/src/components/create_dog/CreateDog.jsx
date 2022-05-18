@@ -8,7 +8,7 @@ import { getTemperaments } from "../../actions";
 import { converter } from "../../helpers/converter";
 import { validate } from "../../helpers/formValidate";
 
-const DB_HOST = process.env.REACT_APP_DB_HOST;
+const BACKEND_BASE_URL = process.env.REACT_APP_BACKEND_BASE_URL;
 
 const initialForm = {
   name: "",
@@ -62,7 +62,7 @@ const CreateDog = () => {
         Accept: "application/json",
       };
       axios
-        .post(`${DB_HOST}/dog`, body, { headers })
+        .post(`${BACKEND_BASE_URL}/dog`, body, { headers })
         .then(() => {
           setForm(initialForm);
           setImageUrlPreview(null);

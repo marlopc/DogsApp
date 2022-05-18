@@ -1,13 +1,10 @@
 .footer-container {
-  clear: both;
-  position: relative;
-  height: 200px;
-  margin-top: -200px;
+  height: var(--footer-height);
   background-color: #a47148;
   border-top: 3px solid #6f4518;
-  margin-top: 5px;
   display: flex;
   align-items: center;
+  box-sizing: border-box;
 }
 
 .img-n-nav-container {
@@ -47,3 +44,4 @@
 .active-link {
   color: red;
 }
+

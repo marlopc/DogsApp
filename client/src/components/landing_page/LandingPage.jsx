@@ -23,7 +23,7 @@ const LandingPage = () => {
         <div className="link-div">
           <Link to="/home/page=1" className="link">
             <div className="enter-btn">
-              <h2>ENTER {">"}</h2>
+              <h2>ENTER</h2>
             </div>
           </Link>
         </div>

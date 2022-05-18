@@ -28,11 +28,14 @@
 }
 
 .detail-background {
+  box-sizing: border-box;
   width: 80%;
   font-family: "Cabin", sans-serif;
   color: #6f4518;
   padding: 20px 20px 100px;
   margin: 0 auto;
+  min-height: calc(100vh - var(--footer-height) - var(--nav-height));
+  height: max-content;
 }
 
 .detail-container {
@@ -41,7 +44,6 @@
   flex-flow: column;
   align-items: center;
   width: 100%;
-  margin: 0 auto;
 }
 
 #dog-name {

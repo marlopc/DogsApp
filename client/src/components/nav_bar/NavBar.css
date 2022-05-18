@@ -1,10 +1,16 @@
 .nav-container {
+  box-sizing: border-box;
   display: flex;
   justify-content: space-between;
   padding: 5px 20px;
   background-color: #d4a276;
-  border-bottom: 1.5px solid #6f4518;
+  border: 1.5px solid #6f4518;
+  border-top: 0;
   align-items: center;
+  height: var(--nav-height);
+  width: calc(100% - 30px);
+  margin: 0 auto;
+  border-radius: 0 0 10px 10px;
 }
 
 .logo-to-home {
@@ -14,9 +20,7 @@
 }
 
 .go-home {
-  /* font-family: "Quite Magical", sans-serif; */
   font-family: "Cabin", sans-serif;
-  /* font-size: 23px; */
   font-size: 18px;
   padding-left: 6px;
   position: relative;
@@ -37,10 +41,9 @@
 }
 
 .small-logo {
-  width: 10vw;
+  width: calc(var(--nav-height) - 20px);
   padding: 5px 0;
   display: none;
-  min-width: 50px;
 }
 
 .create-dog {
@@ -55,43 +58,10 @@
   justify-content: space-around;
 }
 
-.vertical-div-nav {
-  background-color: #6f4518;
-  margin-top: 5px;
-  width: 1px;
-  height: 30px;
-}
-
 .about {
   font-family: "Cabin", sans-serif;
   font-size: 18px;
   padding-top: 10px;
-}
-
-.create-dog:hover {
-  animation: shake 0.5s;
-}
-
-.about:hover {
-  animation: shake 0.5s;
-}
-
-@keyframes shake {
-  0% {
-    transform: rotate(0deg);
-  }
-  25% {
-    transform: rotate(3deg);
-  }
-  50% {
-    transform: rotate(0deg);
-  }
-  75% {
-    transform: rotate(-3deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
 }
 
 @media screen and (max-width: 920px) {
@@ -101,21 +71,23 @@
 
   .nav-container {
     display: block;
+    width: 100%;
+    border-radius: 0;
+    border: 0;
+    border-bottom: 1px solid var(--brown-1);
   }
 
   .links-container {
-    width: 90vw;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
   }
 
-  .create-dog {
-    padding: 5px 1vw 0 0;
-  }
-
+  .create-dog,
   .about {
-    padding-top: 5px;
+    margin-bottom: 20px;
   }
 
   .logo {
@@ -123,7 +95,7 @@
   }
 
   .small-logo {
-    display: inline;
+    display: block;
   }
 
   .go-home-hidden,

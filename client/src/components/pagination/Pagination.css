@@ -9,8 +9,7 @@
 .pagination-ctrl-container strong {
   color: #603808;
   padding-top: 0px;
-  font-size: 40px;
-  font-family: "Quite Magical", sans-serif;
+  font-size: 28px;
 }
 
 .pagination-ctrl-container strong::selection {
@@ -24,15 +23,17 @@
 
 .nav-buttons {
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
-  border-radius: 10px;
-  background-color: #a47148;
-  color: #603808;
-  border: 2px solid #8b5e34;
+  border-radius: 50%;
+  background-color: var(--brown-2);
+  color: var(--brown-1);
+  border: 1px solid var(--brown-1);
   width: 30px;
   height: 30px;
-  font-family: "Quite Magical", sans-serif;
-  font-size: 25px;
+  font-size: 13px;
   text-decoration: none;
 }
 
@@ -91,7 +92,7 @@
   .nav-buttons {
     width: 40px;
     height: 40px;
-    font-size: 35px;
+    font-size: 22px;
   }
 
   .pagination-ctrl-container strong {

@@ -1,41 +1,44 @@
 .about-page {
-  font-family: "Quite Magical", sans-serif;
-  color: #603808;
+  color: var(--brown-1);
+}
+
+.about-page *:not(h1) {
+  font-family: var(--font-body), sans-serif;
 }
 
 .about-page h1,
-.about-container h3 {
+.about-page h3 {
   text-align: center;
+}
+
+.about-page h1,
+.about-page h2 {
+  text-transform: uppercase;
 }
 
 .about-container {
   margin: 0 auto;
-  width: 60%;
+  max-width: 750px;
+  margin: 0 auto;
+  padding: 0 30px;
   height: 100%;
-  min-height: 70vh;
   display: flex;
   flex-direction: column;
+  padding-bottom: 15px;
 }
 
-.about-container h3 {
-  font-size: 15px;
-  font-family: "Cabin", sans-serif;
-  margin-left: 3%;
-  width: 100%;
+.about-container h2 {
+  font-size: 18px;
 }
 
 .about-container p {
-  margin-left: 3%;
   width: 100%;
-  font-family: "Cabin", sans-serif;
 }
 
 .socials-wrapper {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  width: 50%;
   margin: 2vh 0;
+  gap: 25px;
 }
 
 .social-item {
@@ -49,19 +52,18 @@
 
 .text-link {
   width: max-content;
-  font-size: 20px;
-  padding-bottom: 5%;
+  font-size: 14px;
+  padding: 0 0 12px 2px;
 }
 
 .tech-ul {
   padding: 0;
-  font-size: 17px; 
-  font-family: "Cabin", sans-serif;
-  list-style: "› ";
+  font-size: 16px; 
+  list-style: none;
 }
 
 .tech-ul li {
-  margin-left: 1.5%;
+  margin: 10px;
 }
 
 @media screen and (max-width: 900px) {

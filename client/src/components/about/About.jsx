@@ -15,26 +15,25 @@ const About = () => {
     <div>
       <NavBar />
       <div className="about-page">
-        <h1>ABOUT ME</h1>
+        <h1>About me</h1>
         <div className="about-container">
           <p>
             Hi! I'm Lucas, a web developer student, this is a project that I
             made for Henry's bootcamp, it can search dogs, filter and sort them,
             also can create your own dog!
           </p>
-          <p>hope you like it!</p>
+          <p>Hope you like it!</p>
           <div className="tecnologies-wrapper">
-            <h2>TECHNOLOGIES USED:</h2>
+            <h2>Technologies used:</h2>
             <ul className="tech-ul">
-              <li>React-Redux</li>
-              <li>Node.JS</li>
+              <li>React with Redux</li>
               <li>Express</li>
               <li>Sequelize</li>
               <li>PostgreSQL</li>
             </ul>
           </div>
           <p>
-            you can use the following links if you want to contact me or see
+            You can use the following links if you want to contact me or see
             more:
           </p>
           <div className="socials-wrapper">
@@ -44,7 +43,7 @@ const About = () => {
                 target="_black"
                 rel="noreferrer"
               >
-                <img src={linkedInIcon} alt="linkedIn-icon" width="100px" />
+                <img src={linkedInIcon} alt="linkedIn-icon" width="60px" />
               </a>
               <a
                 href="https://www.linkedin.com/in/lucas-panaro/"
@@ -61,7 +60,7 @@ const About = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <img src={gitHubIcon} alt="github-icon" width="100px" />
+                <img src={gitHubIcon} alt="github-icon" width="60px" />
               </a>
               <a
                 href="https://www.linkedin.com/in/lucas-panaro/"

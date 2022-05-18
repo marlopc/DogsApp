@@ -1,53 +1,59 @@
 .form-container {
   display: flex;
-  box-sizing: border-box;
   flex-flow: column;
-  padding: 2%;
+  padding: 10px;
   align-items: flex-start;
   height: 100%;
   justify-content: space-around;
-  background-color: #d4a276;
-  font-family: "Cabin", sans-serif;
-  border: 1px solid #603808;
+  background-color: var(--brown-3);
+  border: 1px solid var(--brown-1);
   min-height: 203px;
-  border-radius: 3px;
+  border-radius: 5px;
+  gap: 5px;
 }
 
 .form-container {
-  color: #6f4518;
+  color: var(--brown-1);
 }
 
 .search-div {
   display: flex;
   width: 100%;
+  gap: 5px;
+  height: 30px;
 }
 
 .search-input {
   width: 85%;
-  margin-right: 2%;
-  font-family: "Cabin", sans-serif;
+  font-family: var(--font-body), sans-serif;
+  border-radius: 5px;
+  border: 1px solid var(--brown-1);
+  padding: 0 8px;
 }
 
 .search-submit {
-  text-align: center;
-  border-radius: 20px;
-  background-color: #a47148;
-  color: #603808;
-  border: 2px solid #8b5e34;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--brown-2);
+  border: 1px solid var(--brown-1);
+  color: var(--brown-1);
   width: 30px;
-  height: 30px;
-  font-family: "Quite Magical", sans-serif;
-  font-size: 25px;
-  text-decoration: none;
   cursor: pointer;
 }
 
-.select-temps {
-  width: 80%;
+.select-temps,
+.select-sort {
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid var(--brown-1);
 }
 
-.select-sort {
-  width: 80%;
+.check-label {
+  font-size: 14px;
+  margin-left: 5px;
 }
 
 @media screen and (max-width: 920px) {
@@ -55,14 +61,6 @@
     justify-content: space-between;
     height: 100%;
     min-height: 145px;
-  }
-
-  .select-temps {
-    width: 100%;
-  }
-
-  .select-sort {
-    width: 100%;
   }
 
   .search-input {

@@ -128,7 +128,6 @@ const SearchFilters = () => {
           data-testid="filters-checkbox"
         />
         <label htmlFor="checkbox" className="check-label">
-          {" "}
           Made by user
         </label>
       </div>

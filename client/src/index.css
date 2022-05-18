@@ -1,14 +1,40 @@
 @import-normalize;
 
+@font-face {
+  font-family: "Cabin";
+  src: url("./assets/fonts/Cabin-Regular.ttf");
+}
+
+@font-face {
+  font-family: "Quite Magical";
+  src: url("./assets/fonts/Quite-Magical.ttf");
+}
+
+:root {
+  --background-color: #f9f8f8;
+  --brown-1: #6f4518;
+  --brown-2: #bc8a5f;
+  --brown-3: #d4a276;
+  --white: #fefefe;
+  --font-heading: "Quite Magical";
+  --font-body: "Cabin";
+  --footer-height: 200px;
+  --nav-height: 89px;
+}
+
 body {
-  min-height: 100%;
+  min-height: 100vh;
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
+  font-family: var(--font-body), sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #ffedd8;
+  background-color: var(--background-color);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-heading), sans-serif;
 }
 
 code {
@@ -16,6 +42,3 @@ code {
     monospace;
 }
 
-#root {
-  height: 100vh;
-}
